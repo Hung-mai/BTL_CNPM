@@ -10,5 +10,12 @@ package com.nhom25.btl_cnpm.service;
  * @author hungn
  */
 public class HouseholdService {
+    // lấy dữ liệu từ DAO về đây và thực hiện các chức năng- dịch vụ
+    
+    // các hàm đó là 
+    // tìm kiếm
+    // sắp xếp
+    // lọc
+    // vân vân tùy vào các dịch vụ mình muốn cung cấp cho người dùng
     
 }

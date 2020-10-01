@@ -10,5 +10,10 @@ package com.nhom25.btl_cnpm.dao;
  * @author hungn
  */
 public class HouseholdDAO {
+    // lẫy toàn bộ dữ liệu từ database về thông qua connectionController
+    // và truyền vào list
     
+    // viết các hàm thêm, sửa, xóa, lấy dữ liệu
+    
+    // class này để thao tác thay đổi trực tiếp lên database
 }

@@ -10,5 +10,7 @@ package com.nhom25.btl_cnpm.entity;
  * @author hungn
  */
 public class Household {
-    
+    // viết các thuộc tính
+    // constructor
+    // getter and setter
 }
