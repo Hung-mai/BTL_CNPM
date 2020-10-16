@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package moneymanagement;
+package com.nhom25.btl_cnpm.entity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -56,14 +56,6 @@ public class Fee {
 
     public void setNumOfHousehold(int numOfHousehold) {
         this.numOfHousehold = numOfHousehold;
-    }
-
-    public List<Integer> getListOfHousehold() {
-        return listOfHousehold;
-    }
-
-    public void setListOfHousehold(List<Integer> listOfHousehold) {
-        this.listOfHousehold = listOfHousehold;
     }
     
 }
