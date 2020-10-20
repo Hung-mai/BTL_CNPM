@@ -5,33 +5,32 @@
  */
 package com.nhom25.btl_cnpm.entity;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author James Nguyen
  */
 public class Fee {
-    private int mId;
+    private int fId;
     public String name;
     public int totalMoney;
     public int numOfHousehold;
-    public HashMap<Integer, Integer> listOfHousehold; // contains the id of household contributed
+    public Map<Integer, Integer> listOfHousehold; // contains the id of household contributed
 
     public Fee(int mId, String name, int totalMoney, int numOfHousehold) {
-        this.mId = mId;
+        this.fId = mId;
         this.name = name;
         this.totalMoney = totalMoney;
         this.numOfHousehold = numOfHousehold;
     }
 
-    public int getmId() {
-        return mId;
+    public int getfId() {
+        return fId;
     }
 
-    public void setmId(int mId) {
-        this.mId = mId;
+    public void setfId(int fId) {
+        this.fId = fId;
     }
 
     public String getName() {
