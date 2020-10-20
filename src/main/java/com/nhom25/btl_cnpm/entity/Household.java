@@ -5,7 +5,7 @@
  */
 package com.nhom25.btl_cnpm.entity;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 /**
@@ -13,25 +13,25 @@ import java.util.List;
  * @author James Nguyen
  */
 public class Household {
-    private int mId;
+    private int hId;
     public String householder;
     public int numOfPeople;
     public int money;
-    public HashMap<Integer, Integer> listOfFee;
+    public Map<Integer, Integer> listOfFee;
 
     public Household(int mId, String householder, int numOfPeople, int money) {
-        this.mId = mId;
+        this.hId = mId;
         this.householder = householder;
         this.numOfPeople = numOfPeople;
         this.money = money;
     } 
     
-    public int getmId() {
-        return mId;
+    public int gethId() {
+        return hId;
     }
 
-    public void setmId(int mId) {
-        this.mId = mId;
+    public void sethId(int hId) {
+        this.hId = hId;
     }
 
     public String getHouseholder() {
@@ -68,10 +68,10 @@ public class Household {
      * @param money 
      */
     public void addContribute(Fee fee, int money){
-        listOfFee.put(fee.getmId(), money);
+        listOfFee.put(fee.getfId(), money);
         this.money += money;
         
-        fee.listOfHousehold.put(this.mId, money);
+        fee.listOfHousehold.put(this.hId, money);
         fee.totalMoney += money;                
     }
 
@@ -80,11 +80,11 @@ public class Household {
      * @param fee 
      */
     public boolean removeContribute(Fee fee){
-        if(listOfFee.containsKey(fee.getmId())){
-            int money = listOfFee.get(fee.getmId());
-            listOfFee.remove(fee.getmId());
+        if(listOfFee.containsKey(fee.getfId())){
+            int money = listOfFee.get(fee.getfId());
+            listOfFee.remove(fee.getfId());
             fee.totalMoney -= money;
-            fee.listOfHousehold.remove(mId);
+            fee.listOfHousehold.remove(hId);
             return true;
         }
         
