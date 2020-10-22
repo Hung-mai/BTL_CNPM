@@ -10,6 +10,7 @@ package com.nhom25.btl_cnpm.controller;
  * @author hungn
  */
 public class HouseholdController {
+    // thử ghi xem ra cái gì ko?
     // viết các hàm để thực hiện các dịch vụ từ các class service, trả về dữ liệu
     // và trả các dữ liệu đó ra view
 }
