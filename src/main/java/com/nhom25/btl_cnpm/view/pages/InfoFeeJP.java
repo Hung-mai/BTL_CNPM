@@ -5,6 +5,10 @@
  */
 package com.nhom25.btl_cnpm.view.pages;
 
+import com.nhom25.btl_cnpm.view.IndexView;
+import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Hung Mai
@@ -46,9 +50,9 @@ public class InfoFeeJP extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
+                {"1", "2", "đ", "1"},
+                {"2", "2", "ff", "3"},
+                {"22", "đá", "3", "2"},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -75,6 +79,11 @@ public class InfoFeeJP extends javax.swing.JPanel {
         jLabel5.setText("5 000 000 ");
 
         jButton1.setText("Thay đổi dóng góp của hộ dân");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Số hộ đóng góp:");
@@ -83,6 +92,11 @@ public class InfoFeeJP extends javax.swing.JPanel {
         jLabel7.setText("25");
 
         jButton2.setText("Quay lại");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Lưu");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -169,6 +183,23 @@ public class InfoFeeJP extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        IndexView.jpnContent.removeAll();    
+        IndexView.jpnContent.setLayout(new BorderLayout());
+        IndexView.jpnContent.add(new FeeManagerJP());
+        IndexView.jpnContent.validate();
+        IndexView.jpnContent.repaint();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int r = jTable1.getSelectedRow();
+        if(r> -1){
+            new ChangeFeeOfHouseholdJF().setVisible(true);
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn 1 hàng chỉnh sửa !");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

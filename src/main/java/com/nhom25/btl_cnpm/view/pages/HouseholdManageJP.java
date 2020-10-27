@@ -5,6 +5,27 @@
  */
 package com.nhom25.btl_cnpm.view.pages;
 
+import com.nhom25.btl_cnpm.view.IndexView;
+import java.awt.BorderLayout;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.plaf.RootPaneUI;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author hungn
@@ -14,8 +35,13 @@ public class HouseholdManageJP extends javax.swing.JPanel {
     /**
      * Creates new form HouseholdManageJP
      */
-    public HouseholdManageJP() {
+    
+    DefaultTableModel model;
+    
+    public HouseholdManageJP(){
         initComponents();
+        
+        model = (DefaultTableModel) householdTable.getModel();
     }
 
     /**
@@ -29,36 +55,54 @@ public class HouseholdManageJP extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        householdTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        addHouseHoldBtn = new javax.swing.JButton();
+        deleteHouseHoldBtn = new javax.swing.JButton();
+        seeHouseHoldBtn = new javax.swing.JButton();
+        searchHouseHoldBtn = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        householdTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {"1", "Mai Tuấn Hưng", "4"},
+                {"2", "Mai Tuấn Thịnh", "3"},
+                {"3", "Dương Trọng Hiếu", "5"},
+                {"4", "Nguyễn Sỹ Nguyên", "6"}
             },
             new String [] {
                 "ID", "Tên chủ hộ", "Số người"
             }
         ));
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setViewportView(jTable1);
+        householdTable.setGridColor(new java.awt.Color(153, 153, 153));
+        jScrollPane1.setViewportView(householdTable);
 
         jLabel1.setText("Tìm kiếm:");
 
-        jButton1.setText("Thêm");
+        addHouseHoldBtn.setText("Thêm");
+        addHouseHoldBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addHouseHoldBtnActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Xóa");
+        deleteHouseHoldBtn.setText("Xóa");
+        deleteHouseHoldBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteHouseHoldBtnActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Xem");
+        seeHouseHoldBtn.setText("Xem");
+        seeHouseHoldBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seeHouseHoldBtnActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Tìm");
+        searchHouseHoldBtn.setText("Tìm");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -76,10 +120,10 @@ public class HouseholdManageJP extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 881, Short.MAX_VALUE)))
                 .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(deleteHouseHoldBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seeHouseHoldBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchHouseHoldBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addHouseHoldBtn))
                 .addGap(26, 26, 26))
         );
         jPanel1Layout.setVerticalGroup(
@@ -89,17 +133,17 @@ public class HouseholdManageJP extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
+                    .addComponent(searchHouseHoldBtn))
                 .addGap(89, 89, 89)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(90, 90, 90)
-                        .addComponent(jButton1)
+                        .addComponent(addHouseHoldBtn)
                         .addGap(70, 70, 70)
-                        .addComponent(jButton4)
+                        .addComponent(seeHouseHoldBtn)
                         .addGap(171, 171, 171)
-                        .addComponent(jButton3)
+                        .addComponent(deleteHouseHoldBtn)
                         .addContainerGap())))
         );
 
@@ -119,16 +163,41 @@ public class HouseholdManageJP extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void deleteHouseHoldBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteHouseHoldBtnActionPerformed
+        // TODO add your handling code here:
+        int r = householdTable.getSelectedRow();
+        if(r> -1){
+            
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn 1 hàng để xóa !");
+    }//GEN-LAST:event_deleteHouseHoldBtnActionPerformed
+
+    private void addHouseHoldBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHouseHoldBtnActionPerformed
+        // TODO add your handling code here:
+        new AddHouseholdJF().setVisible(true);
+    }//GEN-LAST:event_addHouseHoldBtnActionPerformed
+
+    private void seeHouseHoldBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeHouseHoldBtnActionPerformed
+        // TODO add your handling code here:
+        int r = householdTable.getSelectedRow();
+        if(r> -1){
+            IndexView.jpnContent.removeAll();    
+            IndexView.jpnContent.setLayout(new BorderLayout());
+            IndexView.jpnContent.add(new InfoHouseholdJP());
+            IndexView.jpnContent.validate();
+            IndexView.jpnContent.repaint();
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn 1 hàng để xem và chỉnh sửa !");
+    }//GEN-LAST:event_seeHouseHoldBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton addHouseHoldBtn;
+    private javax.swing.JButton deleteHouseHoldBtn;
+    private javax.swing.JTable householdTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton searchHouseHoldBtn;
+    private javax.swing.JButton seeHouseHoldBtn;
     // End of variables declaration//GEN-END:variables
 }

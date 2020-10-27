@@ -5,6 +5,10 @@
  */
 package com.nhom25.btl_cnpm.view.pages;
 
+import com.nhom25.btl_cnpm.view.IndexView;
+import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Hung Mai
@@ -53,6 +57,11 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Quay lại");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Thay đổi đóng góp");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +151,21 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        int r = jTable1.getSelectedRow();
+        if(r> -1){
+            new ChangeFeeOfHouseholdJF().setVisible(true);
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn 1 hàng chỉnh sửa !");
+        
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        IndexView.jpnContent.removeAll();    
+        IndexView.jpnContent.setLayout(new BorderLayout());
+        IndexView.jpnContent.add(new HouseholdManageJP());
+        IndexView.jpnContent.validate();
+        IndexView.jpnContent.repaint();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
