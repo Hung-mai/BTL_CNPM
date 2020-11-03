@@ -10,6 +10,7 @@ import com.nhom25.btl_cnpm.controller.ScreenSwitchingController;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,7 +23,7 @@ public class IndexView extends javax.swing.JFrame {
      */
     public IndexView() {
         initComponents();
-        
+        this.setLocationRelativeTo(null);
         setTitle("Quản lý thu chi khu dân cư");
         
         ScreenSwitchingController controller = new ScreenSwitchingController(jpnContent);
@@ -33,6 +34,8 @@ public class IndexView extends javax.swing.JFrame {
         listItem.add(new DanhMucBean("housejpn", jpnHouseMenu, jlbHouseMenu));
         listItem.add(new DanhMucBean("feejpn", jpnFeeMenu, jlbFeeMenu));
         listItem.add(new DanhMucBean("infojpn", jpnInfo, jlbInfo));
+//        listItem.add(new DanhMucBean("infojpn", jpnInfo, jlbInfo));
+//        listItem.add(new DanhMucBean("infojpn", jpnInfo, jlbInfo));
         
         controller.setEvent(listItem);
     }
@@ -94,7 +97,7 @@ public class IndexView extends javax.swing.JFrame {
 
         jlbHouseMenu.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jlbHouseMenu.setForeground(new java.awt.Color(255, 255, 255));
-        jlbHouseMenu.setIcon(new javax.swing.ImageIcon("C:\\Users\\hungn\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\mavenproject1\\btl_cnpm\\src\\main\\java\\com\\nhom25\\btl_cnpm\\images\\icon_house.png")); // NOI18N
+        jlbHouseMenu.setIcon(new javax.swing.ImageIcon("C:\\Users\\Hung Mai\\Documents\\NetBeansProjects\\BTL_CNPM\\src\\main\\java\\com\\nhom25\\btl_cnpm\\images\\icon_house.png")); // NOI18N
         jlbHouseMenu.setText("Hộ dân");
 
         javax.swing.GroupLayout jpnHouseMenuLayout = new javax.swing.GroupLayout(jpnHouseMenu);
@@ -119,7 +122,7 @@ public class IndexView extends javax.swing.JFrame {
         jlbFeeMenu.setBackground(new java.awt.Color(102, 102, 102));
         jlbFeeMenu.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jlbFeeMenu.setForeground(new java.awt.Color(255, 255, 255));
-        jlbFeeMenu.setIcon(new javax.swing.ImageIcon("C:\\Users\\hungn\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\mavenproject1\\btl_cnpm\\src\\main\\java\\com\\nhom25\\btl_cnpm\\images\\baseline_monetization_on_white_18dp.png")); // NOI18N
+        jlbFeeMenu.setIcon(new javax.swing.ImageIcon("C:\\Users\\Hung Mai\\Documents\\NetBeansProjects\\BTL_CNPM\\src\\main\\java\\com\\nhom25\\btl_cnpm\\images\\baseline_monetization_on_white_18dp.png")); // NOI18N
         jlbFeeMenu.setText("Các khoản phí");
 
         javax.swing.GroupLayout jpnFeeMenuLayout = new javax.swing.GroupLayout(jpnFeeMenu);
@@ -128,7 +131,7 @@ public class IndexView extends javax.swing.JFrame {
             jpnFeeMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnFeeMenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlbFeeMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlbFeeMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jpnFeeMenuLayout.setVerticalGroup(
@@ -140,13 +143,13 @@ public class IndexView extends javax.swing.JFrame {
         );
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Made by HungMai");
+        jLabel2.setText("Made by Team14");
 
         jpnInfo.setBackground(new java.awt.Color(0, 153, 0));
 
         jlbInfo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jlbInfo.setForeground(new java.awt.Color(255, 255, 255));
-        jlbInfo.setIcon(new javax.swing.ImageIcon("C:\\Users\\hungn\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\mavenproject1\\btl_cnpm\\src\\main\\java\\com\\nhom25\\btl_cnpm\\images\\baseline_info_white_18dp.png")); // NOI18N
+        jlbInfo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Hung Mai\\Documents\\NetBeansProjects\\BTL_CNPM\\src\\main\\java\\com\\nhom25\\btl_cnpm\\images\\baseline_info_white_18dp.png")); // NOI18N
         jlbInfo.setText("About us");
 
         javax.swing.GroupLayout jpnInfoLayout = new javax.swing.GroupLayout(jpnInfo);
@@ -172,21 +175,15 @@ public class IndexView extends javax.swing.JFrame {
             jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jpnMenuLayout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(89, 89, 89))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnMenuLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jpnHouseMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnMenuLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jpnFeeMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jpnMenuLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jpnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jpnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpnFeeMenu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpnHouseMenu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnMenuLayout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabel2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnMenuLayout.setVerticalGroup(
             jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,7 +195,7 @@ public class IndexView extends javax.swing.JFrame {
                 .addComponent(jpnFeeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addContainerGap())
         );
@@ -209,7 +206,7 @@ public class IndexView extends javax.swing.JFrame {
         jpnContent.setLayout(jpnContentLayout);
         jpnContentLayout.setHorizontalGroup(
             jpnContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 608, Short.MAX_VALUE)
+            .addGap(0, 903, Short.MAX_VALUE)
         );
         jpnContentLayout.setVerticalGroup(
             jpnContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,27 +220,29 @@ public class IndexView extends javax.swing.JFrame {
             .addGroup(jpnRootLayout.createSequentialGroup()
                 .addComponent(jpnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpnContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jpnContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnRootLayout.setVerticalGroup(
             jpnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+            .addComponent(jpnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
             .addGroup(jpnRootLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpnContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jpnContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpnRoot, javax.swing.GroupLayout.DEFAULT_SIZE, 883, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpnRoot, javax.swing.GroupLayout.DEFAULT_SIZE, 1169, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpnRoot, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpnRoot, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -292,7 +291,7 @@ public class IndexView extends javax.swing.JFrame {
     private javax.swing.JLabel jlbFeeMenu;
     private javax.swing.JLabel jlbHouseMenu;
     private javax.swing.JLabel jlbInfo;
-    private javax.swing.JPanel jpnContent;
+    public static javax.swing.JPanel jpnContent;
     private javax.swing.JPanel jpnFeeMenu;
     private javax.swing.JPanel jpnHouseMenu;
     private javax.swing.JPanel jpnInfo;

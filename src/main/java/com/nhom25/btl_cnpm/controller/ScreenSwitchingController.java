@@ -50,6 +50,13 @@ public class ScreenSwitchingController {
             item.getJlb().addMouseListener(new LabelEvent(item.getKind(), item.getJpn(), item.getJlb()));
         }
     }
+    
+//    public void setAction(List<DanhMucBean> listItem) {
+//        this.listItem = listItem;
+//        for(DanhMucBean item : listItem){
+//            item.getJlb().addMouseListener(new LabelEvent(item.getKind(), item.getJpn(), item.getJlb()));
+//        }
+//    }
 
 
     
