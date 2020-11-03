@@ -5,12 +5,10 @@
  */
 package com.nhom25.btl_cnpm.dao;
 
-<<<<<<< HEAD
+
 import com.nhom25.btl_cnpm.entity.Household;
 import java.sql.*;
 import java.util.Set;
-
-=======
 import com.nhom25.btl_cnpm.entity.Fee;
 import com.nhom25.btl_cnpm.entity.Household;
 import java.sql.Connection;
@@ -18,7 +16,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
->>>>>>> cd3b3e834d2372ec4f4b144fa71c10cb82ac5ce2
 /**
  *
  * @author hungn
@@ -31,7 +28,7 @@ public class ConnectionController {
     private final Connection conn;
     private final Statement stat;
     
-<<<<<<< HEAD
+
     public ConnectionController() throws SQLException{
         this.conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql_se20201", "root", "");
         this.stat = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -243,19 +240,6 @@ public class ConnectionController {
         
     }
         
-=======
-    public ConnectionController() throws SQLException {
-
-            String url = "jdbc:mysql://localhost:3306/se_project";// your db name
-            String user = "root"; // your db username
-            String password = ""; // your db password
-            this.conn = DriverManager.getConnection(url, user, password);
-            if (conn != null) {
-                System.out.println("Connect success!");
-            } 
-            this.stat = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);        
-
-   }
        
     public Household showH(int hId) throws SQLException {
         String show = "SELECT * FROM household WHERE hId ="+hId+";";
@@ -268,6 +252,7 @@ public class ConnectionController {
         
         return A;
         }
+
     public Fee showF(int fId) throws SQLException {
         String show = "SELECT * FROM fee WHERE fId ="+fId+";";
          ResultSet rs = this.stat.executeQuery(show);
@@ -315,6 +300,7 @@ public class ConnectionController {
            }
            
     }
+
       public int[] findH(String f) throws SQLException {
         
         String sfind = "SELECT * FROM household WHERE hId like '%"+f+"%';";
@@ -329,6 +315,7 @@ public class ConnectionController {
         return A;
     
     }
+
       public int[] findF(String f) throws SQLException {
         
         String sfind = "SELECT * FROM fee WHERE fId like '%"+f+"%';";
@@ -345,7 +332,6 @@ public class ConnectionController {
     }
            
   
->>>>>>> cd3b3e834d2372ec4f4b144fa71c10cb82ac5ce2
 }
     
 
