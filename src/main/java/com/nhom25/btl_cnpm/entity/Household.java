@@ -5,8 +5,10 @@
  */
 package com.nhom25.btl_cnpm.entity;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -25,6 +27,12 @@ public class Household {
         this.numOfPeople = numOfPeople;
         this.money = money;
     } 
+    
+    public Household(String householder, int numOfPeople){
+        this.householder = householder;
+        this.numOfPeople = numOfPeople;
+        this.listOfFee = new HashMap<>();
+    }
     
     public int gethId() {
         return hId;
@@ -50,7 +58,16 @@ public class Household {
         this.numOfPeople = numOfPeople;
     }
 
+    /**
+     * tự động tính tổng số tiền có sẵn trong list
+     * @return 
+     */
     public int getMoney() {
+        money = 6000 * this.getNumOfPeople();
+        Set<Integer> setMoney = this.listOfFee.keySet();
+        setMoney.forEach(key -> {
+            money += this.listOfFee.get(key);
+        });
         return money;
     }
 
@@ -62,6 +79,9 @@ public class Household {
         return (List) listOfFee.keySet();
     }
     
+    public Map<Integer, Integer> getMapOfFee(){
+        return listOfFee;
+    }
     /**
      * Charge to a fee
      * @param fee
