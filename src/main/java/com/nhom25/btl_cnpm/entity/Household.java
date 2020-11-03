@@ -68,7 +68,7 @@ public class Household {
      * @param money 
      */
     public void addContribute(Fee fee, int money){
-        listOfFee.put(fee.getmId(), money);
+        listOfFee.put(fee.getfId(), money);
         this.money += money;
         
         fee.listOfHousehold.put(this.hId, money);
@@ -80,9 +80,9 @@ public class Household {
      * @param fee 
      */
     public boolean removeContribute(Fee fee){
-        if(listOfFee.containsKey(fee.getmId())){
-            int money = listOfFee.get(fee.getmId());
-            listOfFee.remove(fee.getmId());
+        if(listOfFee.containsKey(fee.getfId())){
+            int money = listOfFee.get(fee.getfId());
+            listOfFee.remove(fee.getfId());
             fee.totalMoney -= money;
             fee.listOfHousehold.remove(hId);
             return true;
