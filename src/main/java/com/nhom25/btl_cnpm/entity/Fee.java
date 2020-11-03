@@ -19,6 +19,7 @@ public class Fee {
     public int numOfHousehold;
     public HashMap<Integer, Integer> listOfHousehold; // contains the id of household contributed
 
+    
     public Fee(int mId, String name, int totalMoney, int numOfHousehold) {
         this.mId = mId;
         this.name = name;
@@ -56,6 +57,11 @@ public class Fee {
 
     public void setNumOfHousehold(int numOfHousehold) {
         this.numOfHousehold = numOfHousehold;
+    }
+
+    @Override
+    public String toString() {
+        return "Fee{" + "mId=" + mId + ", name=" + name + ", totalMoney=" + totalMoney + ", numOfHousehold=" + numOfHousehold + ", listOfHousehold=" + listOfHousehold + '}';
     }
     
 }
