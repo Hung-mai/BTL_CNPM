@@ -17,8 +17,7 @@ public class HouseholdDAO {
     // và truyền vào list
     public static void main(String[] args) throws SQLException {
          ConnectionController conn = new ConnectionController();
-         Household a = new Household(2460,"a",3,3);
-         conn.delete(a);
+         conn.findAllHousehold();
          
     }
    

@@ -46,14 +46,14 @@ public class AddHouseholdJF extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("THÊM HỘ DÂN");
 
         jLabel2.setText("Tên chủ hộ:");
 
         jLabel3.setText("Số nhân khẩu:");
 
-        jButton1.setText("Cancel");
+        jButton1.setText("Huỷ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -88,7 +88,7 @@ public class AddHouseholdJF extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(119, 119, 119)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
                 .addComponent(btnConfirm)
                 .addGap(98, 98, 98))
         );
@@ -105,7 +105,7 @@ public class AddHouseholdJF extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtNumOfPeople, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(btnConfirm))
@@ -128,10 +128,10 @@ public class AddHouseholdJF extends javax.swing.JFrame {
             HouseholdController con = new HouseholdController();
             boolean correct = con.addHousehold(name, numOfPeople);
             if(!correct){
-                JOptionPane.showMessageDialog(this, "Không hợp lệ!");
+                JOptionPane.showMessageDialog(this, "Không hợp lệ!", "Thông báo", 0);
             }
             else{
-                JOptionPane.showMessageDialog(this, "Thêm thành công!");
+                JOptionPane.showMessageDialog(this, "Thêm thành công!", "Thông báo", 1);
                 this.dispose();
             }
         } catch (SQLException ex) {

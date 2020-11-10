@@ -5,6 +5,8 @@
  */
 package com.nhom25.btl_cnpm.view.pages;
 
+import com.nhom25.btl_cnpm.controller.FeeController;
+import com.nhom25.btl_cnpm.controller.HouseholdController;
 import com.nhom25.btl_cnpm.dao.ConnectionController;
 import com.nhom25.btl_cnpm.entity.Fee;
 import com.nhom25.btl_cnpm.entity.Household;
@@ -44,7 +46,7 @@ public class FeeManagerJP extends javax.swing.JPanel {
             model.setRowCount(0);
             for(Fee f : feeList){
                 model.addRow(new Object[]{model.getRowCount() + 1, 
-                    f.getName(), f.getTotalMoney(), f.getNumOfHousehold()});
+                    f.getName(), f.getNumOfHousehold(), f.getTotalMoney()*1000});
             }
         } catch (SQLException ex) {
             Logger.getLogger(FeeManagerJP.class.getName()).log(Level.SEVERE, null, ex);
@@ -173,9 +175,29 @@ public class FeeManagerJP extends javax.swing.JPanel {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         int r = feeTable.getSelectedRow();
-        if(r> -1){
-            
-        } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để xóa !");
+        if(r > -1){
+            if(r == 0){
+                JOptionPane.showMessageDialog(jPanel1, "Không thể xoá khoản này!");
+            } 
+            else {
+                int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá hộ dân này không?\nKhông thể hoàn lại thao tác này.", "Xác nhận", 0);
+            if(input == 0){
+                try {
+                    FeeController hcon = new FeeController();
+                    boolean correct = hcon.removeFee(feeList.get(r));
+                    if(correct){
+                        JOptionPane.showMessageDialog(this, "Xoá thành công!", "Thông báo", 1);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra!", "Thông báo", 0);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(HouseholdManageJP.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                showFee();
+            }
+            }
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để xóa!");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoActionPerformed

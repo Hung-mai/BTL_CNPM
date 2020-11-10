@@ -15,7 +15,7 @@ import java.util.Set;
  * @author James Nguyen
  */
 public class Household {
-    private int hId;
+    public int hId;
     public String householder;
     public int numOfPeople;
     public int money;
@@ -64,7 +64,7 @@ public class Household {
      * @return 
      */
     public int getMoney() {
-        money = 6000 * this.getNumOfPeople();
+        money = 0;
         Set<Integer> setMoney = this.listOfFee.keySet();
         setMoney.forEach(key -> {
             money += this.listOfFee.get(key);

@@ -5,18 +5,39 @@
  */
 package com.nhom25.btl_cnpm.controller;
 
+import com.nhom25.btl_cnpm.dao.ConnectionController;
+import com.nhom25.btl_cnpm.entity.Household;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author James Nguyen
  */
 public class FeeController {
+    ConnectionController controller;
+    
+    public FeeController() throws SQLException{
+        this.controller = new ConnectionController();
+        
+    }
+    
     public static boolean addFee(String name){
         if(name.equals("")){
             return false;
         }
-        // theem ham chen ho dan
+        // theem ham chen phi
         return true;
     }
-    
-    
+    /*
+    public boolean removeFee(Fee fee){
+        try{
+            controller.delete(fee);
+        }catch (SQLException ex) {
+            Logger.getLogger(HouseholdController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    }
+    */
 }

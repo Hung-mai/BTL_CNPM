@@ -5,6 +5,7 @@
  */
 package com.nhom25.btl_cnpm.view.pages;
 
+import com.nhom25.btl_cnpm.controller.HouseholdController;
 import com.nhom25.btl_cnpm.dao.ConnectionController;
 import com.nhom25.btl_cnpm.entity.Household;
 import com.nhom25.btl_cnpm.view.IndexView;
@@ -94,7 +95,7 @@ public class HouseholdManageJP extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Tên chủ hộ", "Số người"
+                "STT", "Tên chủ hộ", "Số người"
             }
         ));
         householdTable.setGridColor(new java.awt.Color(153, 153, 153));
@@ -197,15 +198,29 @@ public class HouseholdManageJP extends javax.swing.JPanel {
     private void deleteHouseHoldBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteHouseHoldBtnActionPerformed
         // TODO add your handling code here:
         int r = householdTable.getSelectedRow();
-        if(r> -1){
-            
-        } else JOptionPane.showMessageDialog(jPanel1, "Chọn 1 hàng để xóa !");
+        if(r > -1){
+            int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá hộ dân này không?\nKhông thể hoàn lại thao tác này.", "Xác nhận", 0);
+            if(input == 0){
+                try {
+                    HouseholdController hcon = new HouseholdController();
+                    boolean correct = hcon.removeHousehold(householdList.get(r));
+                    if(correct){
+                        JOptionPane.showMessageDialog(this, "Xoá thành công!", "Thông báo", 1);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra!", "Thông báo", 0);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(HouseholdManageJP.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                showHousehold();
+            }
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn 1 hàng để xóa!");
     }//GEN-LAST:event_deleteHouseHoldBtnActionPerformed
 
     private void addHouseHoldBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHouseHoldBtnActionPerformed
         // TODO add your handling code here:
         new AddHouseholdJF().setVisible(true);
-        
         showHousehold();
     }//GEN-LAST:event_addHouseHoldBtnActionPerformed
 

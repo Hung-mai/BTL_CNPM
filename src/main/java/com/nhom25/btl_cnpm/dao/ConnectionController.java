@@ -53,7 +53,8 @@ public class ConnectionController {
             while(rs.next()){
                 Household hd = new Household(rs.getInt("hId"), rs.getString("householder"), 
                         rs.getInt("numberOfPeople"), rs.getInt("money"));
-                //hd.setListOfFee(findFeeOfHousehold(hd.gethId()));
+                hd.money = 0;
+                hd.setListOfFee(findFeeOfHousehold(hd));
                 householdList.add(hd);
             }
         } catch (SQLException ex) {
@@ -87,7 +88,7 @@ public class ConnectionController {
             while(rs.next()){
                 Fee f = new Fee(rs.getInt("fId"), rs.getString("name"), 
                         rs.getInt("totalMoney"), rs.getInt("numberOfHousehold"));
-                //f.listOfHousehold = findHouseholdOfFee(f.getfId());
+                f.listOfHousehold = findHouseholdOfFee(f.getfId());
                 feeList.add(f);
             }
         } catch (SQLException ex) {
@@ -111,12 +112,14 @@ public class ConnectionController {
         return feeList;
     }
     
-    public Map<Integer, Integer> findFeeOfHousehold(int hId) throws SQLException{
+    public Map<Integer, Integer> findFeeOfHousehold(Household h) throws SQLException{
         Map<Integer, Integer> listOfFee = new HashMap<>();
-        String sql = "select fId, money from listfee where hId = '" + hId + "'";
-        ResultSet rs = stat.executeQuery(sql);
-        while(rs.next()){
-            listOfFee.put(rs.getInt("fId"), rs.getInt("money"));
+        String sql = "select fId, money from listfee where hId = '" + h.hId + "'";
+        Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        ResultSet res = state.executeQuery(sql);
+        while(res.next()){
+            listOfFee.put(res.getInt("fId"), res.getInt("money"));
+            h.money += res.getInt("money");
         }
         return listOfFee;
     }
@@ -124,12 +127,14 @@ public class ConnectionController {
     public Map<Integer, Integer> findHouseholdOfFee(int fId) throws SQLException{
         Map<Integer, Integer> listOfHousehold = new HashMap<>();
         String sql = "select hId, money from listfee where fId = " + fId;
-        ResultSet rs = stat.executeQuery(sql);
+        Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        ResultSet rs = state.executeQuery(sql);
         while(rs.next()){
             listOfHousehold.put(rs.getInt("hId"), rs.getInt("money"));
         }
         return listOfHousehold;
     }
+    
     
     /**
      * chỉ áp dụng để thêm hộ dân mới
@@ -149,7 +154,7 @@ public class ConnectionController {
         while(rset.next()){
             hId = rset.getInt("hId");
         }        
-        String listFeee = "INSERT INTO listFee VALUES (" + hId + "," + 1 + "," + 6000*household.getNumOfPeople() + ")";
+        String listFeee = "INSERT INTO listfee VALUES (" + hId + "," + 1 + "," + 6*household.getNumOfPeople() + ")";
         this.stat.executeUpdate(listFeee);        
         Set<Integer> fId = household.getMapOfFee().keySet();
         for(Integer key : fId){
@@ -163,7 +168,7 @@ public class ConnectionController {
             int totalMoney = rset.getInt("totalMoney");
             int number = rset.getInt("numberOfHousehold");
             if(feeId == 1){
-                totalMoney += household.getNumOfPeople()*6000;
+                totalMoney += household.getNumOfPeople()*6;
                 number++;
                 rset.updateInt("totalMoney", totalMoney);
                 rset.updateInt("numberOfHousehold", number);
@@ -239,14 +244,14 @@ public class ConnectionController {
      * @throws SQLException 
      */
     public void adjustNumberOfPeople(int hId, int numberOfPeople) throws SQLException{
-        int money = numberOfPeople*6000;
+        int money = numberOfPeople*6;
         ResultSet rset = this.stat.executeQuery("SELECT * FROM household");
         while(rset.next()){
            int houseId = rset.getInt("hId");
            int number = rset.getInt("numberOfPeople");
            int hmoney = rset.getInt("money");
            if(houseId == hId){
-               hmoney += money - number*6000;
+               hmoney += money - number*6;
                rset.updateInt("money", hmoney);
                rset.updateInt("numberOfPeople", numberOfPeople);
                rset.updateRow();
@@ -390,48 +395,49 @@ public class ConnectionController {
         String test = "SELECT * FROM household WHERE hId ="+household.gethId();
            ResultSet setID = this.stat.executeQuery(test);
            if(setID.next()){
-               String delete = "DELETE FROM household WHERE household.hId = "+household.gethId()+";";
+               this.stat.executeUpdate("DELETE FROM listfee WHERE hId = "+household.gethId());
+               String delete = "DELETE FROM household WHERE hId = "+household.gethId()+";";
                this.stat.executeUpdate(delete);
                this.stat.executeUpdate("INSERT INTO removedhousehold (hId, houseHolder,numOfPerson,money) VALUES "
-                 + "('"+household.gethId()+"','"+household.getHouseholder()+"','"+household.getNumOfPeople()+"','"+household.getMoney()+"');");
+                 + "('"+household.hId+"','"+household.householder+"','"+household.numOfPeople+"','"+household.money+"');");
            }
            
     }
-
       public int[] findH(String f) throws SQLException {
         
-        String sfind = "SELECT * FROM household WHERE hId like '%"+f+"%';";
+        String sfind = "SELECT * FROM household WHERE householder LIKE '%"+f+"%';";
         ResultSet find = this.stat.executeQuery(sfind);
-        int i = find.getRow();
+        int i = find.getType();
         int a = 0;
         int[] A = new int[i];
-        while(find.next()&&a<i){
+        while(find.next()){
             A[a] = find.getInt("hId");
             a++;
         }
-        return A;
-    
+        return A;    
     }
-
+      
       public int[] findF(String f) throws SQLException {
         
-        String sfind = "SELECT * FROM fee WHERE fId like '%"+f+"%';";
+        String sfind = "SELECT * FROM fee WHERE name LIKE '%"+f+"%';";
         ResultSet find = this.stat.executeQuery(sfind);
-        int i = find.getRow();
+        int i = find.getType();
         int a = 0;
         int[] A = new int[i];
-        while(find.next()&&a<i){
+        while(find.next()){
             A[a] = find.getInt("fId");
             a++;
         }
-        return A;
-    
+        return A;    
     }
-      
+    
        public String nameOfFeeHousehold(int fId) throws SQLException{
-           String s = "Select name from fee where fid = " + fId;
+           String s = "Select name from fee where fid = '" + fId + "'";
            ResultSet rs = this.stat.executeQuery(s);
-           return rs.getString("name");
+           while(rs.next()){
+               return rs.getString("name");
+           }
+           return null;
        }
            
   
