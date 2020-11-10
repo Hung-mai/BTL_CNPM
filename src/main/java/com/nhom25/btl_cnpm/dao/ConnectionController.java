@@ -16,6 +16,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author hungn
@@ -30,8 +36,99 @@ public class ConnectionController {
     
 
     public ConnectionController() throws SQLException{
-        this.conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql_se20201", "root", "");
+        this.conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/mysql_se20201", "root", "");
         this.stat = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+    }
+    
+    /**
+     * hàm tìm kiếm toàn bộ hộ dân, khoản phí và hàm trả về khoản phí theo hộ dân, hộ dân theo khoản phí
+     */
+    public List<Household> findAllHousehold(){
+        List<Household> householdList = new ArrayList<>();
+        
+        try{
+            String sql = "select * from household";            
+            ResultSet rs = stat.executeQuery(sql);
+            
+            while(rs.next()){
+                Household hd = new Household(rs.getInt("hId"), rs.getString("householder"), 
+                        rs.getInt("numberOfPeople"), rs.getInt("money"));
+                //hd.setListOfFee(findFeeOfHousehold(hd.gethId()));
+                householdList.add(hd);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            if(stat != null){
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn != null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return householdList;
+    }
+    
+    public List<Fee> findAllFee(){
+        List<Fee> feeList = new ArrayList<>();
+        
+        try{
+            String sql = "select * from fee";            
+            ResultSet rs = stat.executeQuery(sql);
+            
+            while(rs.next()){
+                Fee f = new Fee(rs.getInt("fId"), rs.getString("name"), 
+                        rs.getInt("totalMoney"), rs.getInt("numberOfHousehold"));
+                //f.listOfHousehold = findHouseholdOfFee(f.getfId());
+                feeList.add(f);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            if(stat != null){
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn != null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return feeList;
+    }
+    
+    public Map<Integer, Integer> findFeeOfHousehold(int hId) throws SQLException{
+        Map<Integer, Integer> listOfFee = new HashMap<>();
+        String sql = "select fId, money from listfee where hId = '" + hId + "'";
+        ResultSet rs = stat.executeQuery(sql);
+        while(rs.next()){
+            listOfFee.put(rs.getInt("fId"), rs.getInt("money"));
+        }
+        return listOfFee;
+    }
+    
+    public Map<Integer, Integer> findHouseholdOfFee(int fId) throws SQLException{
+        Map<Integer, Integer> listOfHousehold = new HashMap<>();
+        String sql = "select hId, money from listfee where fId = " + fId;
+        ResultSet rs = stat.executeQuery(sql);
+        while(rs.next()){
+            listOfHousehold.put(rs.getInt("hId"), rs.getInt("money"));
+        }
+        return listOfHousehold;
     }
     
     /**
@@ -278,7 +375,7 @@ public class ConnectionController {
                 String insert = "INSERT INTO `household` (`hId`, `houseHolder`, `numOfPerson`,`money`) VALUES "
                     + "(NULL, '"+household.getHouseholder()+"', '"+household.getNumOfPeople()+"', '"+household.getMoney()+"');";
                 this.stat.executeUpdate(insert);
-                Set <Integer> fId = household.getListOfFee().keySet();
+                Set <Integer> fId = (Set) household.getListOfFee();
                 for(Integer key : fId){
                     String listFee = "INSERT INTO `listfee` (`hId`, `fId`, `money`) VALUES ('"+household.gethId()+"', '"+key
                             +"', '"+household.getListOfFee() +"');";
@@ -330,6 +427,12 @@ public class ConnectionController {
         return A;
     
     }
+      
+       public String nameOfFeeHousehold(int fId) throws SQLException{
+           String s = "Select name from fee where fid = " + fId;
+           ResultSet rs = this.stat.executeQuery(s);
+           return rs.getString("name");
+       }
            
   
 }

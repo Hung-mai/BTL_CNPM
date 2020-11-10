@@ -60,7 +60,7 @@ public class Fee {
 
     @Override
     public String toString() {
-        return "Fee{" + "mId=" + mId + ", name=" + name + ", totalMoney=" + totalMoney + ", numOfHousehold=" + numOfHousehold + ", listOfHousehold=" + listOfHousehold + '}';
+        return "Fee{" + "fId=" + fId + ", name=" + name + ", totalMoney=" + totalMoney + ", numOfHousehold=" + numOfHousehold + ", listOfHousehold=" + listOfHousehold + '}';
     }
     
 }

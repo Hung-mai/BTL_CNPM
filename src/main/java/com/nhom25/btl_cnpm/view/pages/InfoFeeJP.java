@@ -5,9 +5,11 @@
  */
 package com.nhom25.btl_cnpm.view.pages;
 
+import com.nhom25.btl_cnpm.entity.Fee;
 import com.nhom25.btl_cnpm.view.IndexView;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,8 +20,14 @@ public class InfoFeeJP extends javax.swing.JPanel {
     /**
      * Creates new form InfoFeeJP
      */
-    public InfoFeeJP() {
+    Fee fee;
+    DefaultTableModel model;
+    public InfoFeeJP(Fee fee) {
         initComponents();
+        model = (DefaultTableModel) tbHousehold.getModel();
+        lbName.setText(fee.getName());
+        lbMoney.setText("" + fee.getTotalMoney()*1000);
+        lbNumOfHousehold.setText("" + fee.getNumOfHousehold());
     }
 
     /**
@@ -34,21 +42,21 @@ public class InfoFeeJP extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbHousehold = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lbName = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lbMoney = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lbNumOfHousehold = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel1.setText("THÔNG TIN KHOẢN THU");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbHousehold.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"1", "2", "đ", "1"},
                 {"2", "2", "ff", "3"},
@@ -64,19 +72,19 @@ public class InfoFeeJP extends javax.swing.JPanel {
                 "Id", "Tên chủ hộ", "Số nhân khẩu", "Tiền đóng"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbHousehold);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel2.setText("Tên khoản thu:");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
-        jLabel3.setText("Tiền ủng hộ miền Trung lũ lụt ");
+        lbName.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
+        lbName.setText("Tiền ủng hộ miền Trung lũ lụt ");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Tổng cộng:");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("5 000 000 ");
+        lbMoney.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbMoney.setText("5 000 000 ");
 
         jButton1.setText("Thay đổi dóng góp của hộ dân");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -88,8 +96,8 @@ public class InfoFeeJP extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Số hộ đóng góp:");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("25");
+        lbNumOfHousehold.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbNumOfHousehold.setText("25");
 
         jButton2.setText("Quay lại");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -127,9 +135,9 @@ public class InfoFeeJP extends javax.swing.JPanel {
                                     .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5))))
+                                    .addComponent(lbNumOfHousehold, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbName, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbMoney))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -149,15 +157,15 @@ public class InfoFeeJP extends javax.swing.JPanel {
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(lbName))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                    .addComponent(lbNumOfHousehold))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(lbMoney))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
@@ -195,9 +203,9 @@ public class InfoFeeJP extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int r = jTable1.getSelectedRow();
+        int r = tbHousehold.getSelectedRow();
         if(r> -1){
-            new ChangeFeeOfHouseholdJF().setVisible(true);
+            //new ChangeFeeOfHouseholdJF().setVisible(true);
         } else JOptionPane.showMessageDialog(jPanel1, "Chọn 1 hàng chỉnh sửa !");
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -208,13 +216,13 @@ public class InfoFeeJP extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lbMoney;
+    private javax.swing.JLabel lbName;
+    private javax.swing.JLabel lbNumOfHousehold;
+    private javax.swing.JTable tbHousehold;
     // End of variables declaration//GEN-END:variables
 }

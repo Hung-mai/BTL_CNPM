@@ -51,7 +51,7 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jButton1" max="32767" attributes="0"/>
                       <Component id="jButton3" alignment="0" pref="73" max="32767" attributes="0"/>
-                      <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnInfo" alignment="0" max="32767" attributes="0"/>
                       <Component id="jButton4" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -77,7 +77,7 @@
                           <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
                           <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnInfo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="107" max="32767" attributes="0"/>
                           <Component id="jButton4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
@@ -114,19 +114,11 @@
             <Component class="javax.swing.JTable" name="feeTable">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="1">
-                    <Column editable="true" title="Id" type="java.lang.Object">
-                      <Data value="1"/>
-                    </Column>
-                    <Column editable="true" title="T&#xea;n kho&#x1ea3;n ph&#xed;" type="java.lang.Object">
-                      <Data value="ss"/>
-                    </Column>
-                    <Column editable="true" title="S&#x1ed1; h&#x1ed9; &#x111;&#xf3;ng g&#xf3;p" type="java.lang.Object">
-                      <Data value="&#x111;"/>
-                    </Column>
-                    <Column editable="true" title="T&#x1ed5;ng ti&#x1ec1;n &#x111;&#xe3; &#x111;&#x1b0;&#x1ee3;c &#x111;&#xf3;ng g&#xf3;p" type="java.lang.Object">
-                      <Data value="100"/>
-                    </Column>
+                  <Table columnCount="4" rowCount="0">
+                    <Column editable="true" title="Id" type="java.lang.Object"/>
+                    <Column editable="true" title="T&#xea;n kho&#x1ea3;n ph&#xed;" type="java.lang.Object"/>
+                    <Column editable="true" title="S&#x1ed1; h&#x1ed9; &#x111;&#xf3;ng g&#xf3;p" type="java.lang.Object"/>
+                    <Column editable="true" title="T&#x1ed5;ng ti&#x1ec1;n &#x111;&#xe3; &#x111;&#x1b0;&#x1ee3;c &#x111;&#xf3;ng g&#xf3;p" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -160,12 +152,12 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="btnInfo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Xem"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInfoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">

@@ -5,6 +5,8 @@
  */
 package com.nhom25.btl_cnpm.view.pages;
 
+import com.nhom25.btl_cnpm.dao.ConnectionController;
+import com.nhom25.btl_cnpm.entity.Household;
 import com.nhom25.btl_cnpm.view.IndexView;
 import java.awt.BorderLayout;
 import java.io.IOException;
@@ -16,7 +18,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -37,12 +41,31 @@ public class HouseholdManageJP extends javax.swing.JPanel {
      */
     
     DefaultTableModel model;
+    List<Household> householdList = new ArrayList<>();
     
     public HouseholdManageJP(){
         initComponents();
         
         model = (DefaultTableModel) householdTable.getModel();
+        
+        showHousehold();
     }
+    
+    private void showHousehold(){
+        try {
+            ConnectionController con = new ConnectionController();
+            householdList = con.findAllHousehold();
+            model.setRowCount(0);
+            for(Household h : householdList){
+                model.addRow(new Object[]{model.getRowCount() + 1, 
+                    h.getHouseholder(), h.getNumOfPeople()});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HouseholdManageJP.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,15 +85,13 @@ public class HouseholdManageJP extends javax.swing.JPanel {
         deleteHouseHoldBtn = new javax.swing.JButton();
         seeHouseHoldBtn = new javax.swing.JButton();
         searchHouseHoldBtn = new javax.swing.JButton();
+        btnChangeInfo = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         householdTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "Mai Tuấn Hưng", "4"},
-                {"2", "Mai Tuấn Thịnh", "3"},
-                {"3", "Dương Trọng Hiếu", "5"},
-                {"4", "Nguyễn Sỹ Nguyên", "6"}
+
             },
             new String [] {
                 "ID", "Tên chủ hộ", "Số người"
@@ -104,6 +125,13 @@ public class HouseholdManageJP extends javax.swing.JPanel {
 
         searchHouseHoldBtn.setText("Tìm");
 
+        btnChangeInfo.setText("Sửa");
+        btnChangeInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangeInfoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -119,11 +147,12 @@ public class HouseholdManageJP extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 881, Short.MAX_VALUE)))
                 .addGap(44, 44, 44)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(deleteHouseHoldBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(seeHouseHoldBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchHouseHoldBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addHouseHoldBtn))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(deleteHouseHoldBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                    .addComponent(seeHouseHoldBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                    .addComponent(searchHouseHoldBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                    .addComponent(addHouseHoldBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnChangeInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(26, 26, 26))
         );
         jPanel1Layout.setVerticalGroup(
@@ -142,7 +171,9 @@ public class HouseholdManageJP extends javax.swing.JPanel {
                         .addComponent(addHouseHoldBtn)
                         .addGap(70, 70, 70)
                         .addComponent(seeHouseHoldBtn)
-                        .addGap(171, 171, 171)
+                        .addGap(65, 65, 65)
+                        .addComponent(btnChangeInfo)
+                        .addGap(83, 83, 83)
                         .addComponent(deleteHouseHoldBtn)
                         .addContainerGap())))
         );
@@ -174,23 +205,36 @@ public class HouseholdManageJP extends javax.swing.JPanel {
     private void addHouseHoldBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHouseHoldBtnActionPerformed
         // TODO add your handling code here:
         new AddHouseholdJF().setVisible(true);
+        
+        showHousehold();
     }//GEN-LAST:event_addHouseHoldBtnActionPerformed
 
     private void seeHouseHoldBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeHouseHoldBtnActionPerformed
         // TODO add your handling code here:
         int r = householdTable.getSelectedRow();
-        if(r> -1){
+        if(r > -1){
+            Household h = householdList.get(r);
             IndexView.jpnContent.removeAll();    
             IndexView.jpnContent.setLayout(new BorderLayout());
-            IndexView.jpnContent.add(new InfoHouseholdJP());
+            IndexView.jpnContent.add(new InfoHouseholdJP(h));
             IndexView.jpnContent.validate();
             IndexView.jpnContent.repaint();
-        } else JOptionPane.showMessageDialog(jPanel1, "Chọn 1 hàng để xem và chỉnh sửa !");
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn 1 hàng để xem!");
     }//GEN-LAST:event_seeHouseHoldBtnActionPerformed
+
+    private void btnChangeInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeInfoActionPerformed
+        // TODO add your handling code here:
+        int r = householdTable.getSelectedRow();
+        if(r > -1){
+            //new ChangeFeeOfHouseholdJF(householdList.get(r)).setVisible(true);
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn 1 hàng chỉnh sửa!");
+        
+    }//GEN-LAST:event_btnChangeInfoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addHouseHoldBtn;
+    private javax.swing.JButton btnChangeInfo;
     private javax.swing.JButton deleteHouseHoldBtn;
     private javax.swing.JTable householdTable;
     private javax.swing.JLabel jLabel1;

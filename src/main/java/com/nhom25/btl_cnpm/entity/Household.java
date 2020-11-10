@@ -32,6 +32,7 @@ public class Household {
         this.householder = householder;
         this.numOfPeople = numOfPeople;
         this.listOfFee = new HashMap<>();
+        this.money = 0;
     }
     
     public int gethId() {
@@ -82,6 +83,11 @@ public class Household {
     public Map<Integer, Integer> getMapOfFee(){
         return listOfFee;
     }
+
+    public void setListOfFee(Map<Integer, Integer> listOfFee) {
+        this.listOfFee = listOfFee;
+    }
+    
     /**
      * Charge to a fee
      * @param fee

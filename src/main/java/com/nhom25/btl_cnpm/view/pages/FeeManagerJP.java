@@ -5,8 +5,16 @@
  */
 package com.nhom25.btl_cnpm.view.pages;
 
+import com.nhom25.btl_cnpm.dao.ConnectionController;
+import com.nhom25.btl_cnpm.entity.Fee;
+import com.nhom25.btl_cnpm.entity.Household;
 import com.nhom25.btl_cnpm.view.IndexView;
 import java.awt.BorderLayout;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,9 +29,26 @@ public class FeeManagerJP extends javax.swing.JPanel {
      */
     
     DefaultTableModel model;
+    List<Fee> feeList = new ArrayList<>();
+    
     public FeeManagerJP() {
         initComponents();
         model = (DefaultTableModel) feeTable.getModel();
+        showFee();
+    }
+    
+    private void showFee(){
+        try {
+            ConnectionController con = new ConnectionController();
+            feeList = con.findAllFee();
+            model.setRowCount(0);
+            for(Fee f : feeList){
+                model.addRow(new Object[]{model.getRowCount() + 1, 
+                    f.getName(), f.getTotalMoney(), f.getNumOfHousehold()});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FeeManagerJP.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -41,7 +66,7 @@ public class FeeManagerJP extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         feeTable = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        btnInfo = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
@@ -53,7 +78,7 @@ public class FeeManagerJP extends javax.swing.JPanel {
 
         feeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "ss", "đ", "100"}
+
             },
             new String [] {
                 "Id", "Tên khoản phí", "Số hộ đóng góp", "Tổng tiền đã được đóng góp"
@@ -61,10 +86,10 @@ public class FeeManagerJP extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(feeTable);
 
-        jButton2.setText("Xem");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnInfo.setText("Xem");
+        btnInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnInfoActionPerformed(evt);
             }
         });
 
@@ -99,7 +124,7 @@ public class FeeManagerJP extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(30, 30, 30))
         );
@@ -119,7 +144,7 @@ public class FeeManagerJP extends javax.swing.JPanel {
                         .addGap(131, 131, 131)
                         .addComponent(jButton3)
                         .addGap(54, 54, 54)
-                        .addComponent(jButton2)
+                        .addComponent(btnInfo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                         .addComponent(jButton4)
                         .addGap(71, 71, 71))
@@ -150,28 +175,28 @@ public class FeeManagerJP extends javax.swing.JPanel {
         int r = feeTable.getSelectedRow();
         if(r> -1){
             
-        } else JOptionPane.showMessageDialog(jPanel1, "Chọn 1 hàng để xóa !");
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để xóa !");
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoActionPerformed
         // TODO add your handling code here:
         
         int r = feeTable.getSelectedRow();
-        if(r> -1){
+        if(r > -1){
             IndexView.jpnContent.removeAll();    
             IndexView.jpnContent.setLayout(new BorderLayout());
-            IndexView.jpnContent.add(new InfoFeeJP());
+            IndexView.jpnContent.add(new InfoFeeJP(feeList.get(r)));
             IndexView.jpnContent.validate();
             IndexView.jpnContent.repaint();
-        } else JOptionPane.showMessageDialog(jPanel1, "Chọn 1 hàng để xem và chỉnh sửa !");
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để xem và chỉnh sửa!");
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnInfoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnInfo;
     private javax.swing.JTable feeTable;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
