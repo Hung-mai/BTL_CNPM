@@ -23,11 +23,15 @@ public class FeeController {
         
     }
     
-    public static boolean addFee(String name){
+    public boolean addFee(String name){
         if(name.equals("")){
             return false;
         }
-        // theem ham chen phi
+        try {
+            controller.insertFee(name);
+        } catch (SQLException ex) {
+            Logger.getLogger(FeeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return true;
     }
     /*

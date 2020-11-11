@@ -69,7 +69,7 @@ public class FeeManagerJP extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         feeTable = new javax.swing.JTable();
         btnInfo = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnInsert = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -83,7 +83,7 @@ public class FeeManagerJP extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Id", "Tên khoản phí", "Số hộ đóng góp", "Tổng tiền đã được đóng góp"
+                "STT", "Tên khoản phí", "Số hộ đóng góp", "Tổng tiền đã được đóng góp"
             }
         ));
         jScrollPane1.setViewportView(feeTable);
@@ -95,10 +95,10 @@ public class FeeManagerJP extends javax.swing.JPanel {
             }
         });
 
-        jButton3.setText("Thêm");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnInsert.setText("Thêm");
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnInsertActionPerformed(evt);
             }
         });
 
@@ -125,7 +125,7 @@ public class FeeManagerJP extends javax.swing.JPanel {
                 .addGap(60, 60, 60)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                    .addComponent(btnInsert, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
                     .addComponent(btnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(30, 30, 30))
@@ -144,7 +144,7 @@ public class FeeManagerJP extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(131, 131, 131)
-                        .addComponent(jButton3)
+                        .addComponent(btnInsert)
                         .addGap(54, 54, 54)
                         .addComponent(btnInfo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
@@ -167,10 +167,11 @@ public class FeeManagerJP extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         // TODO add your handling code here:
         new AddFeeJF().setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+        showFee();
+    }//GEN-LAST:event_btnInsertActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -183,14 +184,14 @@ public class FeeManagerJP extends javax.swing.JPanel {
                 int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá hộ dân này không?\nKhông thể hoàn lại thao tác này.", "Xác nhận", 0);
             if(input == 0){
                 try {
-                    FeeController hcon = new FeeController();
+                    FeeController hcon = new FeeController();/*
                     boolean correct = hcon.removeFee(feeList.get(r));
                     if(correct){
                         JOptionPane.showMessageDialog(this, "Xoá thành công!", "Thông báo", 1);
                     }
                     else{
                         JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra!", "Thông báo", 0);
-                    }
+                    }*/
                 } catch (SQLException ex) {
                     Logger.getLogger(HouseholdManageJP.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -217,9 +218,9 @@ public class FeeManagerJP extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInfo;
+    private javax.swing.JButton btnInsert;
     private javax.swing.JTable feeTable;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

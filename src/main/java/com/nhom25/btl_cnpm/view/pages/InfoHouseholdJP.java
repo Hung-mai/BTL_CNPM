@@ -46,7 +46,7 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
             model.setRowCount(0);
             for(int fId: household.listOfFee.keySet()){
                 model.addRow(new Object[]{model.getRowCount() + 1,
-                    con.nameOfFeeHousehold(fId), household.listOfFee.get(fId)*1000});
+                    con.nameOfFee(fId), household.listOfFee.get(fId)*1000});
             }
         } catch (SQLException ex) {
             Logger.getLogger(InfoHouseholdJP.class.getName()).log(Level.SEVERE, null, ex);

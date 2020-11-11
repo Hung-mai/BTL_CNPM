@@ -5,9 +5,14 @@
  */
 package com.nhom25.btl_cnpm.view.pages;
 
+import com.nhom25.btl_cnpm.dao.ConnectionController;
 import com.nhom25.btl_cnpm.entity.Fee;
+import com.nhom25.btl_cnpm.entity.Household;
 import com.nhom25.btl_cnpm.view.IndexView;
 import java.awt.BorderLayout;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,9 +30,25 @@ public class InfoFeeJP extends javax.swing.JPanel {
     public InfoFeeJP(Fee fee) {
         initComponents();
         model = (DefaultTableModel) tbHousehold.getModel();
+        this.fee = fee;
         lbName.setText(fee.getName());
         lbMoney.setText("" + fee.getTotalMoney()*1000);
         lbNumOfHousehold.setText("" + fee.getNumOfHousehold());
+        showHouseholdOfFee();
+    }
+    
+    public void showHouseholdOfFee(){
+        try {
+            ConnectionController con = new ConnectionController();
+            model.setRowCount(0);
+            for(int hId: fee.listOfHousehold.keySet()){
+                Household h = con.findHousehold(hId);
+                model.addRow(new Object[]{model.getRowCount() + 1,
+                    h.getHouseholder(), h.getNumOfPeople(), fee.listOfHousehold.get(hId)*1000});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InfoHouseholdJP.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -69,7 +90,7 @@ public class InfoFeeJP extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Id", "Tên chủ hộ", "Số nhân khẩu", "Tiền đóng"
+                "STT", "Tên chủ hộ", "Số nhân khẩu", "Tiền đóng"
             }
         ));
         jScrollPane1.setViewportView(tbHousehold);
@@ -86,7 +107,7 @@ public class InfoFeeJP extends javax.swing.JPanel {
         lbMoney.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbMoney.setText("5 000 000 ");
 
-        jButton1.setText("Thay đổi dóng góp của hộ dân");
+        jButton1.setText("Thay đổi đóng góp của hộ dân");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

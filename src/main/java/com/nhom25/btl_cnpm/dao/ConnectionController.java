@@ -53,7 +53,6 @@ public class ConnectionController {
             while(rs.next()){
                 Household hd = new Household(rs.getInt("hId"), rs.getString("householder"), 
                         rs.getInt("numberOfPeople"), rs.getInt("money"));
-                hd.money = 0;
                 hd.setListOfFee(findFeeOfHousehold(hd));
                 householdList.add(hd);
             }
@@ -196,7 +195,6 @@ public class ConnectionController {
     public void insertFee(String name) throws SQLException{
         String insertFee = "INSERT INTO fee (name, totalMoney, numberOfHousehold) VALUES ('" + name + "', 0, 0)";
         this.stat.executeUpdate(insertFee);
-        System.out.println("Insert fee success");
     }
     
     /**
@@ -431,11 +429,23 @@ public class ConnectionController {
         return A;    
     }
     
-       public String nameOfFeeHousehold(int fId) throws SQLException{
+       public String nameOfFee(int fId) throws SQLException{
            String s = "Select name from fee where fid = '" + fId + "'";
            ResultSet rs = this.stat.executeQuery(s);
            while(rs.next()){
                return rs.getString("name");
+           }
+           return null;
+       }
+       
+       public Household findHousehold(int hId) throws SQLException{
+           String s = "Select * from household where hid = '" + hId + "'";
+           ResultSet rs = this.stat.executeQuery(s);
+           while(rs.next()){
+               Household hd = new Household(rs.getInt("hId"), rs.getString("householder"), 
+                        rs.getInt("numberOfPeople"), rs.getInt("money"));
+                hd.setListOfFee(findFeeOfHousehold(hd));
+                return hd;
            }
            return null;
        }
