@@ -8,6 +8,8 @@ package com.nhom25.btl_cnpm.controller;
 import com.nhom25.btl_cnpm.dao.ConnectionController;
 import com.nhom25.btl_cnpm.entity.Household;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,11 +64,41 @@ public class HouseholdController {
         }
         
         try {
-            controller.adjustFeeHouseholder(hId, fId, Integer.parseInt(num));
+            controller.modifyFeeHouseholder(hId, fId, Integer.parseInt(num));
         } catch (SQLException ex) {
             Logger.getLogger(HouseholdController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;
+    }
+    
+    public boolean modifyHousehold(Household h, String name, String num) throws SQLException{
+        try{
+            if(num.equals("")|| Integer.parseInt(num) < 1 || name.equals("")){
+                return false;
+            }
+        } catch (NumberFormatException e){
+            return false;
+        }
+        controller.modifyHouseholder(h.gethId(), name);
+        controller.modifyNumberOfPeople(h.gethId(), Integer.parseInt(num));
+        return true;
+    }
+    
+    public List<Household> findHousehold(String s){
+        if(s.length() == 0){
+            return controller.findAllHousehold();
+        }
+        try {
+            List<Household> result = new LinkedList<Household>();
+            int listhId[] = controller.findH(s);
+            for(int i = 0; i!= listhId.length; i++){
+                result.add(controller.findHousehold(listhId[i]));
+            }
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(HouseholdController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }

@@ -45,11 +45,16 @@ public class HouseholdManageJP extends javax.swing.JPanel {
     List<Household> householdList = new ArrayList<>();
     
     public HouseholdManageJP(){
-        initComponents();
-        
-        model = (DefaultTableModel) householdTable.getModel();
-        
-        showHousehold();
+        try {
+            initComponents();
+            
+            model = (DefaultTableModel) householdTable.getModel();
+            ConnectionController con = new ConnectionController();
+            householdList = con.findAllHousehold();
+            showHousehold();
+        } catch (SQLException ex) {
+            Logger.getLogger(HouseholdManageJP.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private void showHousehold(){
@@ -81,11 +86,11 @@ public class HouseholdManageJP extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         householdTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         addHouseHoldBtn = new javax.swing.JButton();
         deleteHouseHoldBtn = new javax.swing.JButton();
         seeHouseHoldBtn = new javax.swing.JButton();
-        searchHouseHoldBtn = new javax.swing.JButton();
+        btnSearchHousehold = new javax.swing.JButton();
         btnChangeInfo = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -124,7 +129,12 @@ public class HouseholdManageJP extends javax.swing.JPanel {
             }
         });
 
-        searchHouseHoldBtn.setText("Tìm");
+        btnSearchHousehold.setText("Tìm");
+        btnSearchHousehold.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchHouseholdActionPerformed(evt);
+            }
+        });
 
         btnChangeInfo.setText("Sửa");
         btnChangeInfo.addActionListener(new java.awt.event.ActionListener() {
@@ -143,7 +153,7 @@ public class HouseholdManageJP extends javax.swing.JPanel {
                         .addGap(27, 27, 27)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1))
+                        .addComponent(txtName))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 881, Short.MAX_VALUE)))
@@ -151,7 +161,7 @@ public class HouseholdManageJP extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(deleteHouseHoldBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
                     .addComponent(seeHouseHoldBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
-                    .addComponent(searchHouseHoldBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                    .addComponent(btnSearchHousehold, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
                     .addComponent(addHouseHoldBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnChangeInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(26, 26, 26))
@@ -162,8 +172,8 @@ public class HouseholdManageJP extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchHouseHoldBtn))
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchHousehold))
                 .addGap(89, 89, 89)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
@@ -215,7 +225,7 @@ public class HouseholdManageJP extends javax.swing.JPanel {
                 }
                 showHousehold();
             }
-        } else JOptionPane.showMessageDialog(jPanel1, "Chọn 1 hàng để xóa!");
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để xóa!", "Thông báo", 0);
     }//GEN-LAST:event_deleteHouseHoldBtnActionPerformed
 
     private void addHouseHoldBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHouseHoldBtnActionPerformed
@@ -234,29 +244,45 @@ public class HouseholdManageJP extends javax.swing.JPanel {
             IndexView.jpnContent.add(new InfoHouseholdJP(h));
             IndexView.jpnContent.validate();
             IndexView.jpnContent.repaint();
-        } else JOptionPane.showMessageDialog(jPanel1, "Chọn 1 hàng để xem!");
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để xem!", "Thông báo", 0);
     }//GEN-LAST:event_seeHouseHoldBtnActionPerformed
 
     private void btnChangeInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeInfoActionPerformed
         // TODO add your handling code here:
         int r = householdTable.getSelectedRow();
         if(r > -1){
-            //new ChangeFeeOfHouseholdJF(householdList.get(r)).setVisible(true);
-        } else JOptionPane.showMessageDialog(jPanel1, "Chọn 1 hàng chỉnh sửa!");
-        
+            new AdjustHouseholdJF(householdList.get(r)).setVisible(true);
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để chỉnh sửa!", "Thông báo", 0);
+        showHousehold();
     }//GEN-LAST:event_btnChangeInfoActionPerformed
+
+    private void btnSearchHouseholdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchHouseholdActionPerformed
+        try {
+            // TODO add your handling code here:
+            String s = txtName.getText();
+            HouseholdController hcon = new HouseholdController();
+            List<Household> result = hcon.findHousehold(s);
+            model.setRowCount(0);
+            for(Household h : result){
+                model.addRow(new Object[]{model.getRowCount() + 1, 
+                    h.getHouseholder(), h.getNumOfPeople()});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HouseholdManageJP.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSearchHouseholdActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addHouseHoldBtn;
     private javax.swing.JButton btnChangeInfo;
+    private javax.swing.JButton btnSearchHousehold;
     private javax.swing.JButton deleteHouseHoldBtn;
     private javax.swing.JTable householdTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JButton searchHouseHoldBtn;
     private javax.swing.JButton seeHouseHoldBtn;
+    private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }

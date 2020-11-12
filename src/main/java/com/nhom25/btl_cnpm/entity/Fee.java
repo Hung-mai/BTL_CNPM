@@ -5,6 +5,8 @@
  */
 package com.nhom25.btl_cnpm.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -56,6 +58,15 @@ public class Fee {
 
     public void setNumOfHousehold(int numOfHousehold) {
         this.numOfHousehold = numOfHousehold;
+    }
+
+    public void setListOfHousehold(Map<Integer, Integer> listOfHousehold) {
+        this.listOfHousehold = listOfHousehold;
+    }
+    
+    public List<Integer> getListOfHousehold() {
+        List<Integer> result = new ArrayList(listOfHousehold.keySet());
+        return result;
     }
 
     @Override

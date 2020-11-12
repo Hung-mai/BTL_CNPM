@@ -87,7 +87,7 @@ public class ConnectionController {
             while(rs.next()){
                 Fee f = new Fee(rs.getInt("fId"), rs.getString("name"), 
                         rs.getInt("totalMoney"), rs.getInt("numberOfHousehold"));
-                f.listOfHousehold = findHouseholdOfFee(f.getfId());
+                f.listOfHousehold = findHouseholdOfFee(f);
                 feeList.add(f);
             }
         } catch (SQLException ex) {
@@ -123,9 +123,9 @@ public class ConnectionController {
         return listOfFee;
     }
     
-    public Map<Integer, Integer> findHouseholdOfFee(int fId) throws SQLException{
+    public Map<Integer, Integer> findHouseholdOfFee(Fee f) throws SQLException{
         Map<Integer, Integer> listOfHousehold = new HashMap<>();
-        String sql = "select hId, money from listfee where fId = " + fId;
+        String sql = "select hId, money from listfee where fId = " + f.getfId();
         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
         ResultSet rs = state.executeQuery(sql);
         while(rs.next()){
@@ -241,7 +241,7 @@ public class ConnectionController {
      * @param numberOfPeople
      * @throws SQLException 
      */
-    public void adjustNumberOfPeople(int hId, int numberOfPeople) throws SQLException{
+    public void modifyNumberOfPeople(int hId, int numberOfPeople) throws SQLException{
         int money = numberOfPeople*6;
         ResultSet rset = this.stat.executeQuery("SELECT * FROM household");
         while(rset.next()){
@@ -284,12 +284,23 @@ public class ConnectionController {
      * @param name
      * @throws SQLException 
      */
-    public void adjustHouseholder(int hId, String name) throws SQLException{
+    public void modifyHouseholder(int hId, String name) throws SQLException{
         ResultSet rset = this.stat.executeQuery("SELECT * FROM household");
         while(rset.next()){
            int houseId = rset.getInt("hId");
            if(houseId == hId){
                rset.updateString("householder", name);
+               rset.updateRow();
+           }
+        }
+    }
+    
+    public void modifyFee(int fId, String name) throws SQLException{
+        ResultSet rset = this.stat.executeQuery("SELECT * FROM fee");
+        while(rset.next()){
+           int feeId = rset.getInt("fId");
+           if(feeId == fId){
+               rset.updateString("name", name);
                rset.updateRow();
            }
         }
@@ -302,20 +313,20 @@ public class ConnectionController {
      * @param money
      * @throws SQLException 
      */
-    public void adjustFeeHouseholder(int hId, int fId, int money) throws SQLException{
+    public void modifyFeeHouseholder(int hId, int fId, int money) throws SQLException{
         int adjustMoney = 0;
         ResultSet rset = this.stat.executeQuery("SELECT * FROM listFee");
         while(rset.next()){
             int houseId = rset.getInt("hId");
             int feeId = rset.getInt("fId");
             if(feeId == fId && hId == houseId){
-                adjustMoney = rset.getInt("money");
+                adjustMoney = rset.getInt("money")/1000;
             }
         }
-        String updateFee = "UPDATE listFee SET money = " + money + " WHERE hId = " + hId + " AND fId = " + fId;
+        String updateFee = "UPDATE listFee SET money = " + money/1000 + " WHERE hId = " + hId + " AND fId = " + fId;
         this.stat.executeUpdate(updateFee);
         
-        adjustMoney = money - adjustMoney;
+        adjustMoney = money/1000 - adjustMoney;
         rset = this.stat.executeQuery("SELECT * FROM fee");
         while(rset.next()){
             int feeId = rset.getInt("fId");
@@ -429,11 +440,14 @@ public class ConnectionController {
         return A;    
     }
     
-       public String nameOfFee(int fId) throws SQLException{
-           String s = "Select name from fee where fid = '" + fId + "'";
+       public Fee findFee(int fId) throws SQLException{
+           String s = "Select * from fee where fid = '" + fId + "'";
            ResultSet rs = this.stat.executeQuery(s);
            while(rs.next()){
-               return rs.getString("name");
+               Fee f = new Fee(rs.getInt("fId"), rs.getString("name"), 
+                       rs.getInt("totalMoney"), rs.getInt("numberOfHousehold"));
+               f.setListOfHousehold(findHouseholdOfFee(f));
+               return f;
            }
            return null;
        }

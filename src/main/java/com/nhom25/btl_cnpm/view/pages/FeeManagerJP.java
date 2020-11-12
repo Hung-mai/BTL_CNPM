@@ -64,19 +64,25 @@ public class FeeManagerJP extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtName = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         feeTable = new javax.swing.JTable();
         btnInfo = new javax.swing.JButton();
         btnInsert = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnAdjust = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setText("Tìm kiếm:");
 
-        jButton1.setText("Tìm");
+        btnSearch.setText("Tìm");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         feeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -102,10 +108,17 @@ public class FeeManagerJP extends javax.swing.JPanel {
             }
         });
 
-        jButton4.setText("Xóa");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setText("Xóa");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnAdjust.setText("Sửa");
+        btnAdjust.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdjustActionPerformed(evt);
             }
         });
 
@@ -120,14 +133,15 @@ public class FeeManagerJP extends javax.swing.JPanel {
                         .addGap(48, 48, 48)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1))
+                        .addComponent(txtName))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE))
                 .addGap(60, 60, 60)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnInsert, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
                     .addComponent(btnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAdjust, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
@@ -137,21 +151,23 @@ public class FeeManagerJP extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
-                        .addComponent(jButton1)))
+                        .addComponent(btnSearch)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(131, 131, 131)
                         .addComponent(btnInsert)
                         .addGap(54, 54, 54)
                         .addComponent(btnInfo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
-                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAdjust)
+                        .addGap(33, 33, 33)
+                        .addComponent(btnDelete)
                         .addGap(71, 71, 71))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
@@ -173,15 +189,15 @@ public class FeeManagerJP extends javax.swing.JPanel {
         showFee();
     }//GEN-LAST:event_btnInsertActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         int r = feeTable.getSelectedRow();
         if(r > -1){
             if(r == 0){
-                JOptionPane.showMessageDialog(jPanel1, "Không thể xoá khoản này!");
+                JOptionPane.showMessageDialog(jPanel1, "Không thể xoá khoản này!", "Thông báo", 0);
             } 
             else {
-                int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá hộ dân này không?\nKhông thể hoàn lại thao tác này.", "Xác nhận", 0);
+                int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá khoản này không?\nKhông thể hoàn lại thao tác này.", "Xác nhận", 0);
             if(input == 0){
                 try {
                     FeeController hcon = new FeeController();/*
@@ -198,12 +214,11 @@ public class FeeManagerJP extends javax.swing.JPanel {
                 showFee();
             }
             }
-        } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để xóa!");
-    }//GEN-LAST:event_jButton4ActionPerformed
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để xóa!", "Thông báo", 0);
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoActionPerformed
-        // TODO add your handling code here:
-        
+        // TODO add your handling code here:        
         int r = feeTable.getSelectedRow();
         if(r > -1){
             IndexView.jpnContent.removeAll();    
@@ -211,20 +226,51 @@ public class FeeManagerJP extends javax.swing.JPanel {
             IndexView.jpnContent.add(new InfoFeeJP(feeList.get(r)));
             IndexView.jpnContent.validate();
             IndexView.jpnContent.repaint();
-        } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để xem và chỉnh sửa!");
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để xem!", "Thông báo", 0);
         
     }//GEN-LAST:event_btnInfoActionPerformed
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        try {
+            // TODO add your handling code here:
+            String s = txtName.getText();
+            FeeController fcon = new FeeController();
+            List<Fee> result = fcon.findFee(s);
+            model.setRowCount(0);
+            for(Fee f : result){
+                model.addRow(new Object[]{model.getRowCount() + 1, 
+                    f.getName(), f.getNumOfHousehold(), f.getTotalMoney()*1000});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FeeManagerJP.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnAdjustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdjustActionPerformed
+        // TODO add your handling code here:
+        int r = feeTable.getSelectedRow();
+        if(r > -1){
+            if(r == 0){
+                JOptionPane.showMessageDialog(jPanel1, "Không thể sửa khoản đóng góp này!", "Thông báo", 0);
+            }
+            else{
+                new AdjustNameFeeJF(feeList.get(r)).setVisible(true);
+            }
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để chỉnh sửa!", "Thông báo", 0);
+        showFee();
+    }//GEN-LAST:event_btnAdjustActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdjust;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnInfo;
     private javax.swing.JButton btnInsert;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JTable feeTable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }

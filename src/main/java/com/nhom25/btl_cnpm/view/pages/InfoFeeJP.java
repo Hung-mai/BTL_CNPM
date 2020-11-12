@@ -41,7 +41,7 @@ public class InfoFeeJP extends javax.swing.JPanel {
         try {
             ConnectionController con = new ConnectionController();
             model.setRowCount(0);
-            for(int hId: fee.listOfHousehold.keySet()){
+            for(int hId: fee.getListOfHousehold()){
                 Household h = con.findHousehold(hId);
                 model.addRow(new Object[]{model.getRowCount() + 1,
                     h.getHouseholder(), h.getNumOfPeople(), fee.listOfHousehold.get(hId)*1000});
@@ -225,9 +225,15 @@ public class InfoFeeJP extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         int r = tbHousehold.getSelectedRow();
-        if(r> -1){
-            //new ChangeFeeOfHouseholdJF().setVisible(true);
-        } else JOptionPane.showMessageDialog(jPanel1, "Chọn 1 hàng chỉnh sửa !");
+        if(r > -1){
+            if(fee.getfId() == 1){
+                JOptionPane.showMessageDialog(jPanel1, "Không thể sửa khoản đóng góp này!", "Thông báo", 0);
+            } 
+            else {
+                new ChangeFeeOfHouseholdJF(fee.getListOfHousehold().get(r), fee.getfId()).setVisible(true);
+                showHouseholdOfFee();
+            }
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để chỉnh sửa!", "Thông báo", 0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

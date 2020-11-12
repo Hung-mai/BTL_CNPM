@@ -10,9 +10,7 @@ import com.nhom25.btl_cnpm.entity.Household;
 import com.nhom25.btl_cnpm.view.IndexView;
 import java.awt.BorderLayout;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -36,7 +34,7 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
         this.household = household;
         lbHouseholder.setText(household.getHouseholder());
         lbNumOfPeople.setText("" + household.getNumOfPeople());
-        lbTotalMoney.setText("" + 1000*household.getMoney());
+        lbTotalMoney.setText("" + 1000*household.getMoney());        
         showFeeOfHousehold();
     }
     
@@ -44,9 +42,9 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
         try {
             ConnectionController con = new ConnectionController();
             model.setRowCount(0);
-            for(int fId: household.listOfFee.keySet()){
+            for(int fId: household.getListOfFee()){
                 model.addRow(new Object[]{model.getRowCount() + 1,
-                    con.nameOfFee(fId), household.listOfFee.get(fId)*1000});
+                    con.findFee(fId).getName(), household.listOfFee.get(fId)*1000});
             }
         } catch (SQLException ex) {
             Logger.getLogger(InfoHouseholdJP.class.getName()).log(Level.SEVERE, null, ex);
@@ -205,10 +203,14 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
     private void btnEditFeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditFeeActionPerformed
         // TODO add your handling code here:
         int r = tbFee.getSelectedRow();
-        if(r > -1){
+        if(r == 0){
+            JOptionPane.showMessageDialog(jPanel1, "Không thể sửa khoản đóng góp này!", "Thông báo", 0);
+        }
+        else if(r > -1){
             ChangeFeeOfHouseholdJF frame = new ChangeFeeOfHouseholdJF(household.gethId(), household.getListOfFee().get(r));
             frame.setVisible(true);
-        } else JOptionPane.showMessageDialog(jPanel1, "Chọn 1 hàng chỉnh sửa!", "Thông báo", 0);
+            showFeeOfHousehold();
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để chỉnh sửa!", "Thông báo", 0);
         
     }//GEN-LAST:event_btnEditFeeActionPerformed
 

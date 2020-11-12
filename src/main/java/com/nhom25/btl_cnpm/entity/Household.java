@@ -5,6 +5,7 @@
  */
 package com.nhom25.btl_cnpm.entity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -77,7 +78,8 @@ public class Household {
     }
 
     public List<Integer> getListOfFee() {
-        return (List) listOfFee.keySet();
+        List<Integer> result = new ArrayList(listOfFee.keySet());
+        return result;
     }
     
     public Map<Integer, Integer> getMapOfFee(){
