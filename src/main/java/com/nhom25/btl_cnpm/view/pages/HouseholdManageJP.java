@@ -57,7 +57,7 @@ public class HouseholdManageJP extends javax.swing.JPanel {
         }
     }
     
-    private void showHousehold(){
+    public void showHousehold(){
         try {
             ConnectionController con = new ConnectionController();
             householdList = con.findAllHousehold();
@@ -231,7 +231,6 @@ public class HouseholdManageJP extends javax.swing.JPanel {
     private void addHouseHoldBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHouseHoldBtnActionPerformed
         // TODO add your handling code here:
         new AddHouseholdJF().setVisible(true);
-        showHousehold();
     }//GEN-LAST:event_addHouseHoldBtnActionPerformed
 
     private void seeHouseHoldBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeHouseHoldBtnActionPerformed

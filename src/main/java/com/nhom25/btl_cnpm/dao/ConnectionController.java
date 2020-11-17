@@ -243,10 +243,11 @@ public class ConnectionController {
      */
     public void modifyNumberOfPeople(int hId, int numberOfPeople) throws SQLException{
         int money = numberOfPeople*6;
+        int number = 0;
         ResultSet rset = this.stat.executeQuery("SELECT * FROM household");
         while(rset.next()){
            int houseId = rset.getInt("hId");
-           int number = rset.getInt("numberOfPeople");
+           number = rset.getInt("numberOfPeople");
            int hmoney = rset.getInt("money");
            if(houseId == hId){
                hmoney += money - number*6;
@@ -258,10 +259,11 @@ public class ConnectionController {
         
         rset = this.stat.executeQuery("SELECT * FROM fee");
         while(rset.next()){
-            int feeId = rset.getInt("fId");     
+            int feeId = rset.getInt("fId");  
+            int totalMoney = rset.getInt("totalMoney");
             if(feeId == 1){
+                totalMoney += money - number*6;
                 rset.updateInt("totalMoney", money);
-                rset.updateInt("numberOfHousehold", numberOfPeople);
                 rset.updateRow();
             }
         }
@@ -320,13 +322,13 @@ public class ConnectionController {
             int houseId = rset.getInt("hId");
             int feeId = rset.getInt("fId");
             if(feeId == fId && hId == houseId){
-                adjustMoney = rset.getInt("money")/1000;
+                adjustMoney = rset.getInt("money");
             }
         }
-        String updateFee = "UPDATE listFee SET money = " + money/1000 + " WHERE hId = " + hId + " AND fId = " + fId;
+        String updateFee = "UPDATE listFee SET money = " + money + " WHERE hId = " + hId + " AND fId = " + fId;
         this.stat.executeUpdate(updateFee);
         
-        adjustMoney = money/1000 - adjustMoney;
+        adjustMoney = money - adjustMoney;
         rset = this.stat.executeQuery("SELECT * FROM fee");
         while(rset.next()){
             int feeId = rset.getInt("fId");
@@ -407,8 +409,8 @@ public class ConnectionController {
                this.stat.executeUpdate("DELETE FROM listfee WHERE hId = "+household.gethId());
                String delete = "DELETE FROM household WHERE hId = "+household.gethId()+";";
                this.stat.executeUpdate(delete);
-               this.stat.executeUpdate("INSERT INTO removedhousehold (hId, houseHolder,numOfPerson,money) VALUES "
-                 + "('"+household.hId+"','"+household.householder+"','"+household.numOfPeople+"','"+household.money+"');");
+//               this.stat.executeUpdate("INSERT INTO removedhousehold (hId, houseHolder,numOfPerson,money) VALUES "
+//                 + "('"+household.hId+"','"+household.householder+"','"+household.numOfPeople+"','"+household.money+"');");
            }
            
     }
@@ -462,6 +464,28 @@ public class ConnectionController {
                 return hd;
            }
            return null;
+       }
+       
+       public List<Fee> findFeeNotChargeYet(int hId) throws SQLException{
+           List<Fee> result = new ArrayList<Fee>();
+           String sql = "select fId from fee except (select fId from listfee where hId = " + hId + ")";
+           Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+           ResultSet res = state.executeQuery(sql);
+           while(res.next()){
+               result.add(findFee(res.getInt("fId")));
+           }
+           return result;
+       }
+       
+       public List<Household> findHouseholdNotChargeYet(int fId) throws SQLException{
+           List<Household> result = new ArrayList<Household>();
+           String sql = "select hId from household except (select hId from listfee where fId = " + fId + ")";
+           Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+           ResultSet res = state.executeQuery(sql);
+           while(res.next()){
+               result.add(findHousehold(res.getInt("hId")));
+           }
+           return result;
        }
            
   

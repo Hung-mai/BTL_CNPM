@@ -73,6 +73,7 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
         lbNumOfPeople = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lbTotalMoney = new javax.swing.JLabel();
+        btnAdd = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel1.setText("THÔNG TIN HỘ DÂN");
@@ -124,6 +125,13 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
 
         lbTotalMoney.setText("money");
 
+        btnAdd.setText("Thêm đóng góp");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -158,6 +166,8 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
                         .addGap(141, 141, 141)
                         .addComponent(btnEditFee)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAdd)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbTotalMoney)
@@ -184,7 +194,8 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditFee)
                     .addComponent(jButton1)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(btnAdd))
                 .addGap(29, 29, 29))
         );
 
@@ -207,7 +218,7 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(jPanel1, "Không thể sửa khoản đóng góp này!", "Thông báo", 0);
         }
         else if(r > -1){
-            ChangeFeeOfHouseholdJF frame = new ChangeFeeOfHouseholdJF(household.gethId(), household.getListOfFee().get(r));
+            ChangeFeeOfHouseholdInHouseholdJF frame = new ChangeFeeOfHouseholdInHouseholdJF(household.gethId(), household.getListOfFee().get(r));
             frame.setVisible(true);
             showFeeOfHousehold();
         } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để chỉnh sửa!", "Thông báo", 0);
@@ -227,8 +238,18 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_lbHouseholderComponentAdded
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        try {
+            // TODO add your handling code here:
+            new AddMoneyInHouseholdJF(household).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(InfoHouseholdJP.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnEditFee;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;

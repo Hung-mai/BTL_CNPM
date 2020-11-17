@@ -68,7 +68,9 @@
                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="148" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="btnAdd" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
               </Group>
@@ -101,6 +103,7 @@
                       <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
@@ -160,7 +163,7 @@
                       <Data value="null"/>
                       <Data value="null"/>
                     </Column>
-                    <Column editable="true" title="Ti&#x1ec1;n &#x111;&#xf3;ng" type="java.lang.Object">
+                    <Column editable="true" title="S&#x1ed1; ti&#x1ec1;n" type="java.lang.Object">
                       <Data value="1"/>
                       <Data value="3"/>
                       <Data value="2"/>
@@ -274,6 +277,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnAdd">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Th&#xea;m h&#x1ed9; d&#xe2;n &#x111;&#xf3;ng g&#xf3;p"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

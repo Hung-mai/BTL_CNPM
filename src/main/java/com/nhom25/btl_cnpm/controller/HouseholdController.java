@@ -56,7 +56,7 @@ public class HouseholdController {
     
     public boolean changeFee(int hId, int fId, String num){
         try{
-            if(num.equals("") || Integer.parseInt(num) < 0){
+            if(num.equals("") || Integer.parseInt(num) <= 0){
                 return false;
             }
         } catch (NumberFormatException e){
@@ -64,7 +64,24 @@ public class HouseholdController {
         }
         
         try {
-            controller.modifyFeeHouseholder(hId, fId, Integer.parseInt(num));
+            controller.modifyFeeHouseholder(hId, fId, Integer.parseInt(num)/1000);
+        } catch (SQLException ex) {
+            Logger.getLogger(HouseholdController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    }
+    
+    public boolean addFee(int hId, int fId, String num){
+        try{
+            if(num.equals("") || Integer.parseInt(num) <= 0){
+                return false;
+            }
+        } catch (NumberFormatException e){
+            return false;
+        }
+        
+        try {
+            controller.insertFeeHousehold(hId, fId, Integer.parseInt(num)/1000);
         } catch (SQLException ex) {
             Logger.getLogger(HouseholdController.class.getName()).log(Level.SEVERE, null, ex);
         }

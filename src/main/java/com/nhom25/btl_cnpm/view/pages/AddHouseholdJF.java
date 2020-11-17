@@ -6,6 +6,8 @@
 package com.nhom25.btl_cnpm.view.pages;
 
 import com.nhom25.btl_cnpm.controller.HouseholdController;
+import static com.nhom25.btl_cnpm.view.IndexView.jpnContent;
+import java.awt.BorderLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +27,7 @@ public class AddHouseholdJF extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(false);
     }
 
     /**
@@ -132,6 +135,11 @@ public class AddHouseholdJF extends javax.swing.JFrame {
             }
             else{
                 JOptionPane.showMessageDialog(this, "Thêm thành công!", "Thông báo", 1);
+                jpnContent.removeAll();    
+                jpnContent.setLayout(new BorderLayout());
+                jpnContent.add(new HouseholdManageJP());
+                jpnContent.validate();
+                jpnContent.repaint();
                 this.dispose();
             }
         } catch (SQLException ex) {

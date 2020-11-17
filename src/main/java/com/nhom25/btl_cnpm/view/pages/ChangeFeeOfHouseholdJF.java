@@ -6,6 +6,9 @@
 package com.nhom25.btl_cnpm.view.pages;
 
 import com.nhom25.btl_cnpm.controller.HouseholdController;
+import com.nhom25.btl_cnpm.dao.ConnectionController;
+import static com.nhom25.btl_cnpm.view.IndexView.jpnContent;
+import java.awt.BorderLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +32,7 @@ public class ChangeFeeOfHouseholdJF extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.fId = fId;
         this.hId = hId;
+        setResizable(false);
     }
 
     /**
@@ -123,6 +127,11 @@ public class ChangeFeeOfHouseholdJF extends javax.swing.JFrame {
             }
             else{
                 JOptionPane.showMessageDialog(this, "Sửa thành công!", "Thông báo", 1);
+                jpnContent.removeAll();    
+                jpnContent.setLayout(new BorderLayout());
+                jpnContent.add(new InfoFeeJP(new ConnectionController().findFee(fId)));
+                jpnContent.validate();
+                jpnContent.repaint();
                 this.dispose();
             }
         } catch (SQLException ex) {

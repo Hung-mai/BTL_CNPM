@@ -1,8 +1,10 @@
+D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\view\pages\AddMoneyInHousehold.java
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\controller\ScreenSwitchingController.java
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\view\IndexView.java
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\view\pages\InfoJP.java
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\service\HouseholdService.java
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\controller\FeeController.java
+D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\view\pages\AdjustHouseholdJF.java
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\dao\ConnectionController.java
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\bean\DanhMucBean.java
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\service\FeeService.java
@@ -15,5 +17,6 @@ D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\entity\Household
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\view\pages\FeeManagerJP.java
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\view\pages\InfoFeeJP.java
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\view\pages\AddHouseholdJF.java
+D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\view\pages\AdjustNameFeeJF.java
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\view\pages\HouseholdManageJP.java
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\view\pages\InfoHouseholdJP.java

@@ -73,6 +73,7 @@ public class InfoFeeJP extends javax.swing.JPanel {
         lbNumOfHousehold = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel1.setText("THÔNG TIN KHOẢN THU");
@@ -90,7 +91,7 @@ public class InfoFeeJP extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "STT", "Tên chủ hộ", "Số nhân khẩu", "Tiền đóng"
+                "STT", "Tên chủ hộ", "Số nhân khẩu", "Số tiền"
             }
         ));
         jScrollPane1.setViewportView(tbHousehold);
@@ -134,6 +135,13 @@ public class InfoFeeJP extends javax.swing.JPanel {
             }
         });
 
+        btnAdd.setText("Thêm hộ dân đóng góp");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -166,7 +174,9 @@ public class InfoFeeJP extends javax.swing.JPanel {
                 .addComponent(jButton2)
                 .addGap(153, 153, 153)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
+                .addComponent(btnAdd)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(100, 100, 100))
         );
@@ -193,7 +203,8 @@ public class InfoFeeJP extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(btnAdd))
                 .addGap(31, 31, 31))
         );
 
@@ -236,8 +247,18 @@ public class InfoFeeJP extends javax.swing.JPanel {
         } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để chỉnh sửa!", "Thông báo", 0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        try {
+            // TODO add your handling code here:
+            new AddMoneyInFeeJF(fee).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(InfoFeeJP.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

@@ -198,21 +198,21 @@ public class FeeManagerJP extends javax.swing.JPanel {
             } 
             else {
                 int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá khoản này không?\nKhông thể hoàn lại thao tác này.", "Xác nhận", 0);
-            if(input == 0){
-                try {
-                    FeeController hcon = new FeeController();/*
-                    boolean correct = hcon.removeFee(feeList.get(r));
-                    if(correct){
-                        JOptionPane.showMessageDialog(this, "Xoá thành công!", "Thông báo", 1);
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra!", "Thông báo", 0);
-                    }*/
-                } catch (SQLException ex) {
-                    Logger.getLogger(HouseholdManageJP.class.getName()).log(Level.SEVERE, null, ex);
+                if(input == 0){
+                    try {
+                        FeeController hcon = new FeeController();/*
+                        boolean correct = hcon.removeFee(feeList.get(r));
+                        if(correct){
+                            JOptionPane.showMessageDialog(this, "Xoá thành công!", "Thông báo", 1);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra!", "Thông báo", 0);
+                        }*/
+                        showFee();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(HouseholdManageJP.class.getName()).log(Level.SEVERE, null, ex);
+                    }                
                 }
-                showFee();
-            }
             }
         } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để xóa!", "Thông báo", 0);
     }//GEN-LAST:event_btnDeleteActionPerformed

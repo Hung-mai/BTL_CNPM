@@ -5,8 +5,8 @@
  */
 package com.nhom25.btl_cnpm.view.pages;
 
-import com.nhom25.btl_cnpm.controller.FeeController;
-import com.nhom25.btl_cnpm.entity.Fee;
+import com.nhom25.btl_cnpm.controller.HouseholdController;
+import com.nhom25.btl_cnpm.dao.ConnectionController;
 import static com.nhom25.btl_cnpm.view.IndexView.jpnContent;
 import java.awt.BorderLayout;
 import java.sql.SQLException;
@@ -19,20 +19,19 @@ import javax.swing.JOptionPane;
  *
  * @author Hung Mai
  */
-public class AdjustNameFeeJF extends javax.swing.JFrame {
+public class ChangeFeeOfHouseholdInHouseholdJF extends javax.swing.JFrame {
 
     /**
-     * Adjust form 
+     * Creates new form ChangeFeeOfHouseholdJF
      */
-    Fee fee;
+    static int hId, fId;
     
-//    setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-    public AdjustNameFeeJF(Fee fee) {
+    public ChangeFeeOfHouseholdInHouseholdJF(int hId, int fId) {
         initComponents();
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.fee = fee;
-        txtName.setText(fee.getName());
+        this.fId = fId;
+        this.hId = hId;
         setResizable(false);
     }
 
@@ -47,21 +46,21 @@ public class AdjustNameFeeJF extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtMoney = new javax.swing.JTextField();
+        btnCancel = new javax.swing.JButton();
         btnConfirm = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel1.setText("THAY ĐỔI KHOẢN ĐÓNG GÓP");
+        jLabel1.setText("THAY ĐỔI TIỀN ĐÓNG GÓP");
 
-        jLabel2.setText("Tên khoản đóng góp:");
+        jLabel2.setText("Số tiền:");
 
-        jButton1.setText("Huỷ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCancel.setText("Huỷ");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCancelActionPerformed(evt);
             }
         });
 
@@ -77,53 +76,52 @@ public class AdjustNameFeeJF extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addComponent(jButton1)
+                .addGap(121, 121, 121)
+                .addComponent(btnCancel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnConfirm)
-                .addGap(107, 107, 107))
+                .addGap(113, 113, 113))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jLabel1)))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(txtMoney, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(110, 110, 110))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel1)
-                .addGap(57, 57, 57)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jLabel2)
+                    .addComponent(txtMoney, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancel)
                     .addComponent(btnConfirm))
-                .addGap(48, 48, 48))
+                .addGap(46, 46, 46))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         try {
             // TODO add your handling code here:
-            String s = txtName.getText();
-            FeeController con = new FeeController();
-            boolean correct = con.modifyFee(fee, s);
+            String fee = txtMoney.getText();
+            HouseholdController con = new HouseholdController();
+            boolean correct = con.changeFee(hId, fId, fee);
             if(!correct){
                 JOptionPane.showMessageDialog(this, "Không hợp lệ!", "Thông báo", 0);
             }
@@ -131,13 +129,13 @@ public class AdjustNameFeeJF extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Sửa thành công!", "Thông báo", 1);
                 jpnContent.removeAll();    
                 jpnContent.setLayout(new BorderLayout());
-                jpnContent.add(new FeeManagerJP());
+                jpnContent.add(new InfoHouseholdJP(new ConnectionController().findHousehold(hId)));
                 jpnContent.validate();
                 jpnContent.repaint();
                 this.dispose();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AdjustNameFeeJF.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChangeFeeOfHouseholdInHouseholdJF.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnConfirmActionPerformed
 
@@ -158,13 +156,13 @@ public class AdjustNameFeeJF extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdjustNameFeeJF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChangeFeeOfHouseholdInHouseholdJF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdjustNameFeeJF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChangeFeeOfHouseholdInHouseholdJF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdjustNameFeeJF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChangeFeeOfHouseholdInHouseholdJF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdjustNameFeeJF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChangeFeeOfHouseholdInHouseholdJF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -172,16 +170,16 @@ public class AdjustNameFeeJF extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new AdjustNameFeeJF(fee).setVisible(true);
+                new ChangeFeeOfHouseholdInHouseholdJF(hId, fId).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnConfirm;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtMoney;
     // End of variables declaration//GEN-END:variables
 }
