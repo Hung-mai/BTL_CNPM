@@ -47,11 +47,22 @@ public class HouseholdController {
     
     public boolean removeHousehold(Household household){
         try{
-            controller.delete(household);
+            controller.deleteHousehold(household.gethId());
+            return true;
         }catch (SQLException ex) {
             Logger.getLogger(HouseholdController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return true;
+            return false;
+        }        
+    }
+    
+    public boolean removeFeeOfHousehold(int hId, int fId){
+        try{
+            controller.deleteFeeOfHousehold(fId, hId); // chèn hàm xoá trong controller vào đây
+            return true;
+        }catch (SQLException ex) {
+            Logger.getLogger(HouseholdController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }        
     }
     
     public boolean changeFee(int hId, int fId, String num){

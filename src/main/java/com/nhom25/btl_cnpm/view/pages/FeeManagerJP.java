@@ -128,14 +128,15 @@ public class FeeManagerJP extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
+                        .addGap(60, 60, 60))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(txtName))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE))
-                .addGap(60, 60, 60)
+                        .addComponent(txtName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnInsert, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
@@ -147,28 +148,27 @@ public class FeeManagerJP extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(btnSearch)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(44, 44, 44)
+                        .addComponent(btnSearch))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
-                        .addComponent(btnInsert)
-                        .addGap(54, 54, 54)
-                        .addComponent(btnInfo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAdjust)
-                        .addGap(33, 33, 33)
-                        .addComponent(btnDelete)
-                        .addGap(71, 71, 71))
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btnInsert)
+                        .addGap(75, 75, 75)
+                        .addComponent(btnInfo)
+                        .addGap(75, 75, 75)
+                        .addComponent(btnAdjust)
+                        .addGap(75, 75, 75)
+                        .addComponent(btnDelete)
+                        .addGap(46, 46, 46))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -197,17 +197,18 @@ public class FeeManagerJP extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(jPanel1, "Không thể xoá khoản này!", "Thông báo", 0);
             } 
             else {
-                int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá khoản này không?\nKhông thể hoàn lại thao tác này.", "Xác nhận", 0);
+                String[] options = {"Có", "Không"};
+                int input = JOptionPane.showOptionDialog(null, "Bạn có chắc chắn muốn xoá khoản đóng góp này không?\nKhông thể hoàn lại thao tác này.", "Xác nhận", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);   
                 if(input == 0){
                     try {
-                        FeeController hcon = new FeeController();/*
-                        boolean correct = hcon.removeFee(feeList.get(r));
+                        FeeController con = new FeeController();
+                        boolean correct = con.removeFee(feeList.get(r));
                         if(correct){
                             JOptionPane.showMessageDialog(this, "Xoá thành công!", "Thông báo", 1);
                         }
                         else{
                             JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra!", "Thông báo", 0);
-                        }*/
+                        }
                         showFee();
                     } catch (SQLException ex) {
                         Logger.getLogger(HouseholdManageJP.class.getName()).log(Level.SEVERE, null, ex);

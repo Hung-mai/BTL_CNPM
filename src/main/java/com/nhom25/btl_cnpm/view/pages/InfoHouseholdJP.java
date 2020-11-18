@@ -5,9 +5,11 @@
  */
 package com.nhom25.btl_cnpm.view.pages;
 
+import com.nhom25.btl_cnpm.controller.HouseholdController;
 import com.nhom25.btl_cnpm.dao.ConnectionController;
 import com.nhom25.btl_cnpm.entity.Household;
 import com.nhom25.btl_cnpm.view.IndexView;
+import static com.nhom25.btl_cnpm.view.IndexView.jpnContent;
 import java.awt.BorderLayout;
 import java.sql.SQLException;
 import java.util.List;
@@ -66,7 +68,6 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
         tbFee = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         btnEditFee = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lbHouseholder = new javax.swing.JLabel();
@@ -74,6 +75,7 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         lbTotalMoney = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel1.setText("THÔNG TIN HỘ DÂN");
@@ -85,8 +87,22 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
             new String [] {
                 "STT", "Tên khoản thu", "Số tiền đóng góp"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbFee.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tbFee);
+        if (tbFee.getColumnModel().getColumnCount() > 0) {
+            tbFee.getColumnModel().getColumn(0).setResizable(false);
+            tbFee.getColumnModel().getColumn(1).setResizable(false);
+            tbFee.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         jButton1.setText("Quay lại");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -101,8 +117,6 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
                 btnEditFeeActionPerformed(evt);
             }
         });
-
-        jButton3.setText("Lưu");
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel2.setText("Tên chủ hộ:");
@@ -121,8 +135,10 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
         lbNumOfPeople.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lbNumOfPeople.setText("4");
 
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setText("Tổng số tiền đã đóng:");
 
+        lbTotalMoney.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lbTotalMoney.setText("money");
 
         btnAdd.setText("Thêm đóng góp");
@@ -132,70 +148,80 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
             }
         });
 
+        btnDelete.setText("Xoá");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGap(78, 78, 78)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(btnAdd)
+                .addGap(51, 51, 51)
+                .addComponent(btnEditFee)
+                .addGap(78, 78, 78)
+                .addComponent(btnDelete)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(274, 274, 274)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbHouseholder, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbNumOfPeople, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(141, 141, 141)
-                        .addComponent(btnEditFee)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAdd)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbTotalMoney)
-                .addGap(59, 59, 59))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(274, 274, 274)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(201, 201, 201)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(31, 31, 31)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbNumOfPeople, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lbHouseholder, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(30, 30, 30)
+                                        .addComponent(lbTotalMoney)))))
+                        .addGap(0, 197, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(lbHouseholder)
+                    .addComponent(lbHouseholder))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(lbNumOfPeople))
-                .addGap(57, 57, 57)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(lbTotalMoney))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditFee)
                     .addComponent(jButton1)
-                    .addComponent(jButton3)
-                    .addComponent(btnAdd))
+                    .addComponent(btnAdd)
+                    .addComponent(btnDelete))
                 .addGap(29, 29, 29))
         );
 
@@ -247,12 +273,46 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int r = tbFee.getSelectedRow();
+        if(r == 0){
+            JOptionPane.showMessageDialog(jPanel1, "Không thể xoá khoản đóng góp này!", "Thông báo", 0);
+        }
+        else if(r > -1){
+            String[] options = {"Có", "Không"};
+            int input = JOptionPane.showOptionDialog(null, "Bạn có chắc chắn muốn xoá đóng góp này không?\nKhông thể hoàn lại thao tác này.", "Xác nhận", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);   
+            if(input == 0){
+                try {
+                    HouseholdController hcon = new HouseholdController();
+                    boolean correct = hcon.removeFeeOfHousehold(household.gethId(), household.getListOfFee().get(r)); // thay hàm xoá dóng góp vào đây
+                    if(correct){
+                        JOptionPane.showMessageDialog(this, "Xoá thành công!", "Thông báo", 1);
+                        jpnContent.removeAll();
+                        jpnContent.setLayout(new BorderLayout());
+                        jpnContent.add(new InfoHouseholdJP(new ConnectionController().findHousehold(household.gethId())));
+                        jpnContent.validate();
+                        jpnContent.repaint();
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra!", "Thông báo", 0);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(HouseholdManageJP.class.getName()).log(Level.SEVERE, null, ex);
+                }                
+                showFeeOfHousehold();
+            }
+            showFeeOfHousehold();
+        } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để xoá!", "Thông báo", 0);
+        
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEditFee;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

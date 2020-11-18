@@ -5,10 +5,13 @@
  */
 package com.nhom25.btl_cnpm.view.pages;
 
+import com.nhom25.btl_cnpm.controller.FeeController;
 import com.nhom25.btl_cnpm.dao.ConnectionController;
 import com.nhom25.btl_cnpm.entity.Fee;
 import com.nhom25.btl_cnpm.entity.Household;
 import com.nhom25.btl_cnpm.view.IndexView;
+import static com.nhom25.btl_cnpm.view.IndexView.jpnContent;
+import static com.nhom25.btl_cnpm.view.pages.ChangeFeeOfHouseholdJF.fId;
 import java.awt.BorderLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -72,7 +75,7 @@ public class InfoFeeJP extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         lbNumOfHousehold = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
@@ -128,10 +131,10 @@ public class InfoFeeJP extends javax.swing.JPanel {
             }
         });
 
-        jButton3.setText("Lưu");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setText("Xoá");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -177,7 +180,7 @@ public class InfoFeeJP extends javax.swing.JPanel {
                 .addGap(38, 38, 38)
                 .addComponent(btnAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(btnDelete)
                 .addGap(100, 100, 100))
         );
         jPanel1Layout.setVerticalGroup(
@@ -203,7 +206,7 @@ public class InfoFeeJP extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3)
+                    .addComponent(btnDelete)
                     .addComponent(btnAdd))
                 .addGap(31, 31, 31))
         );
@@ -220,9 +223,40 @@ public class InfoFeeJP extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        if(fee.getfId() != 1){
+            int r = tbHousehold.getSelectedRow();
+            if(r > -1){
+                String[] options = {"Có", "Không"};
+                int input = JOptionPane.showOptionDialog(null, "Bạn có chắc chắn muốn xoá đóng góp này không?\nKhông thể hoàn lại thao tác này.", "Xác nhận", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);   
+                if(input == 0){
+                    try {
+                        FeeController con = new FeeController();
+                        boolean correct = con.removeFeeOfHousehold(fee.getListOfHousehold().get(input), fee.getfId());
+                        if(correct){
+                            JOptionPane.showMessageDialog(this, "Xoá thành công!", "Thông báo", 1);
+                            jpnContent.removeAll();    
+                            jpnContent.setLayout(new BorderLayout());
+                            jpnContent.add(new InfoFeeJP(new ConnectionController().findFee(fee.getfId())));
+                            jpnContent.validate();
+                            jpnContent.repaint();
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(this, "Đã có lỗi xảy ra!", "Thông báo", 0);
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(HouseholdManageJP.class.getName()).log(Level.SEVERE, null, ex);
+                    }  
+                    showHouseholdOfFee();
+                }
+                showHouseholdOfFee();
+            } else JOptionPane.showMessageDialog(jPanel1, "Chọn hàng để xoá!", "Thông báo", 0);
+        }
+        else{
+            JOptionPane.showMessageDialog(jPanel1, "Không thể xoá khoản đóng góp này!", "Thông báo", 0);
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -259,9 +293,9 @@ public class InfoFeeJP extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

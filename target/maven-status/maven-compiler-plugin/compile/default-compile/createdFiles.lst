@@ -4,6 +4,7 @@ com\nhom25\btl_cnpm\view\pages\AddMoneyInFeeJF$2.class
 com\nhom25\btl_cnpm\view\pages\AddMoneyInHouseholdJF.class
 com\nhom25\btl_cnpm\dao\HouseholdDAO.class
 com\nhom25\btl_cnpm\view\pages\ChangeFeeOfHouseholdInHouseholdJF$2.class
+com\nhom25\btl_cnpm\view\pages\InfoHouseholdJP$6.class
 com\nhom25\btl_cnpm\view\pages\AdjustNameFeeJF$2.class
 com\nhom25\btl_cnpm\controller\FeeController.class
 com\nhom25\btl_cnpm\view\pages\HouseholdManageJP$4.class
@@ -34,6 +35,7 @@ com\nhom25\btl_cnpm\view\pages\InfoFeeJP$4.class
 com\nhom25\btl_cnpm\view\IndexView.class
 com\nhom25\btl_cnpm\view\pages\AdjustHouseholdJF$2.class
 com\nhom25\btl_cnpm\view\pages\AddMoneyInHouseholdJF$3.class
+com\nhom25\btl_cnpm\view\pages\InfoHouseholdJP$5.class
 com\nhom25\btl_cnpm\view\pages\ChangeFeeOfHouseholdInHouseholdJF$3.class
 com\nhom25\btl_cnpm\controller\HouseholdController.class
 com\nhom25\btl_cnpm\view\pages\ChangeFeeOfHouseholdInHouseholdJF$1.class

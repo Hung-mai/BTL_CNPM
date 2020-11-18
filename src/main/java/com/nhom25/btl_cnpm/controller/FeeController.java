@@ -97,14 +97,24 @@ public class FeeController {
         return true;
     }
     
-    /*
     public boolean removeFee(Fee fee){
         try{
-            controller.delete(fee);
+            controller.deleteFee(fee.getfId()); //chèn hàm delete
+            return true;
         }catch (SQLException ex) {
             Logger.getLogger(HouseholdController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return true;
+            return false;
+        }        
     }
-    */
+    
+    public boolean removeFeeOfHousehold(int hId, int fId){
+        try{
+            controller.deleteFeeOfHousehold(fId, hId); // chèn hàm xoá trong controller vào đây
+            return true;
+        }catch (SQLException ex) {
+            Logger.getLogger(HouseholdController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }        
+    }
+    
 }

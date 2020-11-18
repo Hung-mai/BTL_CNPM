@@ -209,7 +209,8 @@ public class HouseholdManageJP extends javax.swing.JPanel {
         // TODO add your handling code here:
         int r = householdTable.getSelectedRow();
         if(r > -1){
-            int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá hộ dân này không?\nKhông thể hoàn lại thao tác này.", "Xác nhận", 0);
+            String[] options = {"Có", "Không"};
+            int input = JOptionPane.showOptionDialog(null, "Bạn có chắc chắn muốn xoá hộ dân này không?\nKhông thể hoàn lại thao tác này.", "Xác nhận", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);   
             if(input == 0){
                 try {
                     HouseholdController hcon = new HouseholdController();
@@ -256,18 +257,23 @@ public class HouseholdManageJP extends javax.swing.JPanel {
     }//GEN-LAST:event_btnChangeInfoActionPerformed
 
     private void btnSearchHouseholdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchHouseholdActionPerformed
-        try {
-            // TODO add your handling code here:
-            String s = txtName.getText();
-            HouseholdController hcon = new HouseholdController();
-            List<Household> result = hcon.findHousehold(s);
-            model.setRowCount(0);
-            for(Household h : result){
-                model.addRow(new Object[]{model.getRowCount() + 1, 
-                    h.getHouseholder(), h.getNumOfPeople()});
+        String s = txtName.getText();
+        if(s.length() == 0){
+            showHousehold();
+        }
+        else{
+            try {
+                // TODO add your handling code here:                
+                HouseholdController hcon = new HouseholdController();
+                List<Household> result = hcon.findHousehold(s);
+                model.setRowCount(0);
+                for(Household h : result){
+                    model.addRow(new Object[]{model.getRowCount() + 1, 
+                        h.getHouseholder(), h.getNumOfPeople()});
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(HouseholdManageJP.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(HouseholdManageJP.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSearchHouseholdActionPerformed
 
