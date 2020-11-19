@@ -64,7 +64,7 @@ public class HouseholdManageJP extends javax.swing.JPanel {
             model.setRowCount(0);
             for(Household h : householdList){
                 model.addRow(new Object[]{model.getRowCount() + 1, 
-                    h.getHouseholder(), h.getNumOfPeople()});
+                    h.getHouseholder(), h.getNumOfPeople(), h.getMoney()*1000});
             }
         } catch (SQLException ex) {
             Logger.getLogger(HouseholdManageJP.class.getName()).log(Level.SEVERE, null, ex);
@@ -100,11 +100,26 @@ public class HouseholdManageJP extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Tên chủ hộ", "Số người"
+                "STT", "Tên chủ hộ", "Số người", "Tổng số tiền đã đóng"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         householdTable.setGridColor(new java.awt.Color(153, 153, 153));
+        householdTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(householdTable);
+        if (householdTable.getColumnModel().getColumnCount() > 0) {
+            householdTable.getColumnModel().getColumn(0).setResizable(false);
+            householdTable.getColumnModel().getColumn(1).setResizable(false);
+            householdTable.getColumnModel().getColumn(2).setResizable(false);
+            householdTable.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         jLabel1.setText("Tìm kiếm:");
 

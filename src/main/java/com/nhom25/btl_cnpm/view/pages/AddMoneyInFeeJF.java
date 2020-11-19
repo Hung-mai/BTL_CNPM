@@ -50,6 +50,7 @@ public class AddMoneyInFeeJF extends javax.swing.JFrame {
             model.addElement(household.getHouseholder());
         }
         cbFee.setModel(model);
+        setTitle("Tác vụ");
     }
 
     /**

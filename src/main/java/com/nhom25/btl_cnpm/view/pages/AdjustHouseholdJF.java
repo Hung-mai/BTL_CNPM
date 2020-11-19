@@ -34,6 +34,7 @@ public class AdjustHouseholdJF extends javax.swing.JFrame {
         txtName.setText(household.getHouseholder());
         txtNumOfPeople.setText("" + household.getNumOfPeople());
         setResizable(false);
+        setTitle("Tác vụ");
     }
 
     /**

@@ -17,6 +17,7 @@ com\nhom25\btl_cnpm\view\pages\AdjustHouseholdJF$3.class
 com\nhom25\btl_cnpm\view\pages\AdjustHouseholdJF.class
 com\nhom25\btl_cnpm\view\pages\AdjustNameFeeJF.class
 com\nhom25\btl_cnpm\view\pages\AddMoneyInHouseholdJF$2.class
+com\nhom25\btl_cnpm\view\pages\InfoFeeJP$5.class
 com\nhom25\btl_cnpm\view\pages\InfoJP.class
 com\nhom25\btl_cnpm\view\pages\HouseholdManageJP$5.class
 com\nhom25\btl_cnpm\view\pages\AddMoneyInFeeJF$4.class
@@ -37,12 +38,15 @@ com\nhom25\btl_cnpm\view\pages\AdjustHouseholdJF$2.class
 com\nhom25\btl_cnpm\view\pages\AddMoneyInHouseholdJF$3.class
 com\nhom25\btl_cnpm\view\pages\InfoHouseholdJP$5.class
 com\nhom25\btl_cnpm\view\pages\ChangeFeeOfHouseholdInHouseholdJF$3.class
+com\nhom25\btl_cnpm\view\pages\FeeManagerJP$6.class
 com\nhom25\btl_cnpm\controller\HouseholdController.class
 com\nhom25\btl_cnpm\view\pages\ChangeFeeOfHouseholdInHouseholdJF$1.class
 com\nhom25\btl_cnpm\view\pages\AddMoneyInHouseholdJF$4.class
+com\nhom25\btl_cnpm\view\pages\FeeManagerJP$7.class
 com\nhom25\btl_cnpm\view\pages\AddMoneyInFeeJF$3.class
 com\nhom25\btl_cnpm\view\pages\AddMoneyInHouseholdJF$1.class
 com\nhom25\btl_cnpm\view\pages\AdjustHouseholdJF$1.class
 com\nhom25\btl_cnpm\controller\ScreenSwitchingController$LabelEvent.class
+com\nhom25\btl_cnpm\view\pages\HouseholdManageJP$6.class
 com\nhom25\btl_cnpm\view\pages\AdjustNameFeeJF$1.class
 com\nhom25\btl_cnpm\service\HouseholdService.class

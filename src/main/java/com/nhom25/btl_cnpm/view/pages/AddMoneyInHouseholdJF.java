@@ -40,6 +40,7 @@ public class AddMoneyInHouseholdJF extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
+        setTitle("Tác vụ");
         
         this.household = h;
         ConnectionController con = new ConnectionController();

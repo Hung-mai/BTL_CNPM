@@ -34,6 +34,7 @@ public class AdjustNameFeeJF extends javax.swing.JFrame {
         this.fee = fee;
         txtName.setText(fee.getName());
         setResizable(false);
+        setTitle("Tác vụ");
     }
 
     /**

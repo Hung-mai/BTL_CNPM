@@ -33,6 +33,7 @@ public class ChangeFeeOfHouseholdJF extends javax.swing.JFrame {
         this.fId = fId;
         this.hId = hId;
         setResizable(false);
+        setTitle("Tác vụ");
     }
 
     /**

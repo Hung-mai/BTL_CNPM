@@ -36,7 +36,7 @@ public class IndexView extends javax.swing.JFrame {
         listItem.add(new DanhMucBean("infojpn", jpnInfo, jlbInfo));
 //        listItem.add(new DanhMucBean("infojpn", jpnInfo, jlbInfo));
 //        listItem.add(new DanhMucBean("infojpn", jpnInfo, jlbInfo));
-        
+        setResizable(false);
         controller.setEvent(listItem);
     }
 

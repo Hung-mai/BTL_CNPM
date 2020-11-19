@@ -121,7 +121,7 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel2.setText("Tên chủ hộ:");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Số nhân khẩu:");
 
         lbHouseholder.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
@@ -132,13 +132,13 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
             }
         });
 
-        lbNumOfPeople.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lbNumOfPeople.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lbNumOfPeople.setText("4");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Tổng số tiền đã đóng:");
 
-        lbTotalMoney.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lbTotalMoney.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lbTotalMoney.setText("money");
 
         btnAdd.setText("Thêm đóng góp");
@@ -194,7 +194,7 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(30, 30, 30)
                                         .addComponent(lbTotalMoney)))))
-                        .addGap(0, 197, Short.MAX_VALUE)))
+                        .addGap(0, 233, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -216,7 +216,7 @@ public class InfoHouseholdJP extends javax.swing.JPanel {
                     .addComponent(lbTotalMoney))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditFee)
                     .addComponent(jButton1)
