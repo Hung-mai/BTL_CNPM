@@ -5,9 +5,6 @@
  */
 package com.nhom25.btl_cnpm.dao;
 
-
-import com.nhom25.btl_cnpm.entity.Household;
-import java.sql.*;
 import java.util.Set;
 import com.nhom25.btl_cnpm.entity.Fee;
 import com.nhom25.btl_cnpm.entity.Household;
@@ -43,6 +40,7 @@ public class ConnectionController {
     
     /**
      * hàm tìm kiếm toàn bộ hộ dân, khoản phí và hàm trả về khoản phí theo hộ dân, hộ dân theo khoản phí
+     * @return 
      */
     public List<Household> findAllHousehold(){
         List<Household> householdList = new ArrayList<>();
@@ -525,7 +523,7 @@ public class ConnectionController {
        }
        
        public List<Fee> findFeeNotChargeYet(int hId) throws SQLException{
-           List<Fee> result = new ArrayList<Fee>();
+           List<Fee> result = new ArrayList<>();
            String sql = "select fId from fee except (select fId from listfee where hId = " + hId + ")";
            Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
            ResultSet res = state.executeQuery(sql);
@@ -536,7 +534,7 @@ public class ConnectionController {
        }
        
        public List<Household> findHouseholdNotChargeYet(int fId) throws SQLException{
-           List<Household> result = new ArrayList<Household>();
+           List<Household> result = new ArrayList<>();
            String sql = "select hId from household except (select hId from listfee where fId = " + fId + ")";
            Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
            ResultSet res = state.executeQuery(sql);

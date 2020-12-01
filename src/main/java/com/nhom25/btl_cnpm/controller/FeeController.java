@@ -7,7 +7,6 @@ package com.nhom25.btl_cnpm.controller;
 
 import com.nhom25.btl_cnpm.dao.ConnectionController;
 import com.nhom25.btl_cnpm.entity.Fee;
-import com.nhom25.btl_cnpm.entity.Household;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
@@ -52,7 +51,7 @@ public class FeeController {
             return controller.findAllFee();
         }
         try {
-            List<Fee> result = new LinkedList<Fee>();
+            List<Fee> result = new LinkedList<>();
             int listfId[] = controller.findF(s);
             for(int i = 0; i!= listfId.length; i++){
                 result.add(controller.findFee(listfId[i]));

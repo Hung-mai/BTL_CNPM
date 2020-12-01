@@ -106,12 +106,13 @@ public class Household {
     /**
      * Remove charge to a fee
      * @param fee 
+     * @return  
      */
     public boolean removeContribute(Fee fee){
         if(listOfFee.containsKey(fee.getfId())){
-            int money = listOfFee.get(fee.getfId());
+            int fmoney = listOfFee.get(fee.getfId());
             listOfFee.remove(fee.getfId());
-            fee.totalMoney -= money;
+            fee.totalMoney -= fmoney;
             fee.listOfHousehold.remove(hId);
             return true;
         }

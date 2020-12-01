@@ -117,7 +117,7 @@ public class HouseholdController {
             return controller.findAllHousehold();
         }
         try {
-            List<Household> result = new LinkedList<Household>();
+            List<Household> result = new LinkedList<>();
             int listhId[] = controller.findH(s);
             for(int i = 0; i!= listhId.length; i++){
                 result.add(controller.findHousehold(listhId[i]));
