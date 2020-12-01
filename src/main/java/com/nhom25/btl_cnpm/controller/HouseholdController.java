@@ -112,6 +112,7 @@ public class HouseholdController {
         return true;
     }
     
+    
     public List<Household> findHousehold(String s){
         if(s.length() == 0){
             return controller.findAllHousehold();
