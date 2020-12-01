@@ -9,7 +9,6 @@ Nhóm phát triển: Nhóm 14
 - Bùi Minh Tuấn
 
 
-
 Source code: https://github.com/Hung-mai/BTL_CNPM.git
 
 Công nghệ sử dụng: 
