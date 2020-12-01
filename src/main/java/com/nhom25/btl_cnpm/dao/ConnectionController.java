@@ -55,6 +55,7 @@ public class ConnectionController {
                 hd.setListOfFee(findFeeOfHousehold(hd));
                 householdList.add(hd);
             }
+            
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
