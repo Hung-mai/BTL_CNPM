@@ -193,7 +193,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\images\icon_house.png"/>
+                      <Image iconType="2" name="C:\Users\DELL\Documents\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\images\icon_house.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="H&#x1ed9; d&#xe2;n"/>
                   </Properties>
@@ -240,7 +240,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\images\baseline_monetization_on_white_18dp.png"/>
+                      <Image iconType="2" name="C:\Users\DELL\Documents\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\images\baseline_monetization_on_white_18dp.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="C&#xe1;c kho&#x1ea3;n ph&#xed;"/>
                   </Properties>
@@ -292,7 +292,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\images\baseline_info_white_18dp.png"/>
+                      <Image iconType="2" name="C:\Users\DELL\Documents\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\images\baseline_info_white_18dp.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="About us"/>
                   </Properties>

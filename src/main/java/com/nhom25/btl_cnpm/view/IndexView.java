@@ -97,7 +97,7 @@ public class IndexView extends javax.swing.JFrame {
 
         jlbHouseMenu.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jlbHouseMenu.setForeground(new java.awt.Color(255, 255, 255));
-        jlbHouseMenu.setIcon(new javax.swing.ImageIcon("D:\\HUST\\20201\\IT3180\\BTL_CNPM\\src\\main\\java\\com\\nhom25\\btl_cnpm\\images\\icon_house.png")); // NOI18N
+        jlbHouseMenu.setIcon(new javax.swing.ImageIcon("C:\\Users\\DELL\\Documents\\BTL_CNPM\\src\\main\\java\\com\\nhom25\\btl_cnpm\\images\\icon_house.png")); // NOI18N
         jlbHouseMenu.setText("Hộ dân");
 
         javax.swing.GroupLayout jpnHouseMenuLayout = new javax.swing.GroupLayout(jpnHouseMenu);
@@ -122,7 +122,7 @@ public class IndexView extends javax.swing.JFrame {
         jlbFeeMenu.setBackground(new java.awt.Color(102, 102, 102));
         jlbFeeMenu.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jlbFeeMenu.setForeground(new java.awt.Color(255, 255, 255));
-        jlbFeeMenu.setIcon(new javax.swing.ImageIcon("D:\\HUST\\20201\\IT3180\\BTL_CNPM\\src\\main\\java\\com\\nhom25\\btl_cnpm\\images\\baseline_monetization_on_white_18dp.png")); // NOI18N
+        jlbFeeMenu.setIcon(new javax.swing.ImageIcon("C:\\Users\\DELL\\Documents\\BTL_CNPM\\src\\main\\java\\com\\nhom25\\btl_cnpm\\images\\baseline_monetization_on_white_18dp.png")); // NOI18N
         jlbFeeMenu.setText("Các khoản phí");
 
         javax.swing.GroupLayout jpnFeeMenuLayout = new javax.swing.GroupLayout(jpnFeeMenu);
@@ -149,7 +149,7 @@ public class IndexView extends javax.swing.JFrame {
 
         jlbInfo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jlbInfo.setForeground(new java.awt.Color(255, 255, 255));
-        jlbInfo.setIcon(new javax.swing.ImageIcon("D:\\HUST\\20201\\IT3180\\BTL_CNPM\\src\\main\\java\\com\\nhom25\\btl_cnpm\\images\\baseline_info_white_18dp.png")); // NOI18N
+        jlbInfo.setIcon(new javax.swing.ImageIcon("C:\\Users\\DELL\\Documents\\BTL_CNPM\\src\\main\\java\\com\\nhom25\\btl_cnpm\\images\\baseline_info_white_18dp.png")); // NOI18N
         jlbInfo.setText("About us");
 
         javax.swing.GroupLayout jpnInfoLayout = new javax.swing.GroupLayout(jpnInfo);
