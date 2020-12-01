@@ -193,15 +193,14 @@ public class HouseholdManageJP extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
                         .addComponent(addHouseHoldBtn)
-                        .addGap(70, 70, 70)
+                        .addGap(97, 97, 97)
                         .addComponent(seeHouseHoldBtn)
-                        .addGap(65, 65, 65)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnChangeInfo)
-                        .addGap(83, 83, 83)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(deleteHouseHoldBtn)
-                        .addContainerGap())))
+                        .addGap(83, 83, 83))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
