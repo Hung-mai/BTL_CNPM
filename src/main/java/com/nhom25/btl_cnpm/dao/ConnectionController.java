@@ -397,6 +397,7 @@ public class ConnectionController {
            }
     }
 
+    
      public void deleteHousehold(int hId) throws SQLException{
         String str = "SELECT * FROM listfee WHERE hId = " + hId;
         ResultSet rset = this.stat.executeQuery(str);
