@@ -24,7 +24,6 @@ import java.util.logging.Logger;
  * @author hungn
  */
 
-
 public class ConnectionController {
     // viết phương thức liên kết đến database
     // lưu ý là cần thêm dependency của mysql vào file pom.xml
