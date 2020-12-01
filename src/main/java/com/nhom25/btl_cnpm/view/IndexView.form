@@ -192,9 +192,12 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+<<<<<<< HEAD
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="2" name="C:\Users\DELL\Documents\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\images\icon_house.png"/>
                     </Property>
+=======
+>>>>>>> 6f6df5dc5e393af4a43d3135fbd5c051e9d86e07
                     <Property name="text" type="java.lang.String" value="H&#x1ed9; d&#xe2;n"/>
                   </Properties>
                 </Component>
@@ -239,9 +242,12 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+<<<<<<< HEAD
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="2" name="C:\Users\DELL\Documents\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\images\baseline_monetization_on_white_18dp.png"/>
                     </Property>
+=======
+>>>>>>> 6f6df5dc5e393af4a43d3135fbd5c051e9d86e07
                     <Property name="text" type="java.lang.String" value="C&#xe1;c kho&#x1ea3;n ph&#xed;"/>
                   </Properties>
                 </Component>
@@ -291,9 +297,12 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+<<<<<<< HEAD
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="2" name="C:\Users\DELL\Documents\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\images\baseline_info_white_18dp.png"/>
                     </Property>
+=======
+>>>>>>> 6f6df5dc5e393af4a43d3135fbd5c051e9d86e07
                     <Property name="text" type="java.lang.String" value="About us"/>
                   </Properties>
                 </Component>
