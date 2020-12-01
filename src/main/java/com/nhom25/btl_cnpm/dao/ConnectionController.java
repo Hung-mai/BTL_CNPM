@@ -292,16 +292,7 @@ public class ConnectionController {
         }
     }
     
-    public void modifyFee(int fId, String name) throws SQLException{
-        ResultSet rset = this.stat.executeQuery("SELECT * FROM fee");
-        while(rset.next()){
-           int feeId = rset.getInt("fId");
-           if(feeId == fId){
-               rset.updateString("name", name);
-               rset.updateRow();
-           }
-        }
-    }
+    
     
     /**
      * Chỉnh sửa số tiền đóng của một khoản phí xác định.
