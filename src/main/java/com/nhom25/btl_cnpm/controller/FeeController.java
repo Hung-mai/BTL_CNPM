@@ -27,7 +27,8 @@ public class FeeController {
     }
     
     public boolean addFee(String name){
-        if(name.equals("")){
+        if(name.equals(""))
+        {
             return false;
         }
         try {
