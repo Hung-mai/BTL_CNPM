@@ -173,7 +173,17 @@ public class ConnectionController {
                 rset.updateInt("numberOfHousehold", number);
                 rset.updateRow();
             }
-            
+            else{         
+                for(Integer key : fId){
+                    if(key == feeId){
+                        totalMoney += household.getMapOfFee().get(key);
+                        number++;
+                        rset.updateInt("totalMoney", totalMoney);
+                        rset.updateInt("numberOfHousehold", number);
+                        rset.updateRow();
+                    }
+                }
+            }
         }
     }
     /**
