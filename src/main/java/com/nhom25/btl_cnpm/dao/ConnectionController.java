@@ -159,7 +159,8 @@ public class ConnectionController {
             String listFee = "INSERT INTO listFee VALUES (" + hId + "," + key + "," + household.getMapOfFee().get(key) + ")";
             this.stat.executeUpdate(listFee);
         }
-                
+             
+        
         rset = this.stat.executeQuery("SELECT * FROM fee");
         while(rset.next()){
             int feeId = rset.getInt("fId");
