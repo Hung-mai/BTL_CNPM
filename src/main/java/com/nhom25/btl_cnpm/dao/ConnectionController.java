@@ -122,7 +122,6 @@ public class ConnectionController {
         }
         return listOfFee;
     }
-    
     public Map<Integer, Integer> findHouseholdOfFee(Fee f) throws SQLException{
         Map<Integer, Integer> listOfHousehold = new HashMap<>();
         String sql = "select hId, money from listfee where fId = " + f.getfId();
