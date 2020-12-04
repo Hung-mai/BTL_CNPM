@@ -44,7 +44,6 @@ public class ConnectionController {
      */
     public List<Household> findAllHousehold(){
         List<Household> householdList = new ArrayList<>();
-<<<<<<< Updated upstream
         
         try{
             String sql = "select * from household";            
@@ -75,8 +74,7 @@ public class ConnectionController {
                 }
             }
         }
-=======
->>>>>>> Stashed changes
+
         return householdList;
     }
     
