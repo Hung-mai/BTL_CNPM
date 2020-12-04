@@ -43,8 +43,7 @@ public class ConnectionController {
      * @return 
      */
     public List<Household> findAllHousehold(){
-        List<Household> householdList = new ArrayList<>();
-             
+        List<Household> householdList = new ArrayList<>();  
         try{
             String sql = "select * from household";            
             ResultSet rs = stat.executeQuery(sql);
@@ -54,8 +53,7 @@ public class ConnectionController {
                         rs.getInt("numberOfPeople"), rs.getInt("money"));
                 hd.setListOfFee(findFeeOfHousehold(hd));
                 householdList.add(hd);
-            }
-            
+            }       
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
@@ -78,8 +76,7 @@ public class ConnectionController {
     }
     
     public List<Fee> findAllFee(){
-        List<Fee> feeList = new ArrayList<>();
-        
+        List<Fee> feeList = new ArrayList<>();   
         try{
             String sql = "select * from fee";            
             ResultSet rs = stat.executeQuery(sql);
@@ -133,20 +130,17 @@ public class ConnectionController {
         return listOfHousehold;
     }
     
-    
     /**
-     * chỉ áp dụng để thêm hộ dân mới
+     * áp dụng để thêm hộ dân mới
      * chỉ thêm khi đã có danh sách các khoản thu phí trong listOfFee của hộ đó
      * @param household
      * @throws SQLException 
      */
-    
     public void insertHousehold(Household household) throws SQLException{
         String insertHousehold = "INSERT INTO household(householder, numberOfPeople, money) VALUES ('" 
                 + household.getHouseholder() + "'," + household.getNumOfPeople() + "," + household.getNumOfPeople()*6 + ")";
         this.stat.executeUpdate(insertHousehold);
-        
-        
+ 
         int hId = 0;
         ResultSet rset = this.stat.executeQuery("SELECT hId FROM household WHERE householder = '" + household.getHouseholder() + "'");
         while(rset.next()){
@@ -159,8 +153,7 @@ public class ConnectionController {
             String listFee = "INSERT INTO listFee VALUES (" + hId + "," + key + "," + household.getMapOfFee().get(key) + ")";
             this.stat.executeUpdate(listFee);
         }
-             
-        
+                    
         rset = this.stat.executeQuery("SELECT * FROM fee");
         while(rset.next()){
             int feeId = rset.getInt("fId");
@@ -186,6 +179,7 @@ public class ConnectionController {
             }
         }
     }
+    
     /**
      * thêm tên một loại đóng góp mới
      * giá trị mặc định là 0
@@ -204,7 +198,6 @@ public class ConnectionController {
      * @param money
      * @throws SQLException 
      */
-    
     public void insertFeeHousehold(int hId, int fId, int money) throws SQLException{
         String listFee = "INSERT INTO listFee VALUES (" + hId + "," + fId + "," + money + ")";
             this.stat.executeUpdate(listFee);
@@ -233,7 +226,6 @@ public class ConnectionController {
             }
         }
     }
-    
     
     /**
      * chỉnh sửa số người trong một hộ khi đã biết Id của hộ đó
@@ -371,14 +363,7 @@ public class ConnectionController {
         Fee A = new Fee(fId,name,money,num);   
         return A;
         }
-//    public void repair(Household household1,Household household2) throws SQLException {
-//        String test = "SELECT * FROM `household` WHERE hId ="+household.gethId();
-//               ResultSet setID = this.stat.executeQuery(test);
-//               if(setID.next()){
-//                   String repair = 
-//                   this.stat.executeUpdate(repair);
-//               }
-//    }
+
     public void insert(Household household) throws SQLException {
            String test = "SELECT * FROM `household` WHERE hId ="+household.gethId();
            ResultSet setID = this.stat.executeQuery(test);
@@ -396,7 +381,6 @@ public class ConnectionController {
                 
            }
     }
-
     
      public void deleteHousehold(int hId) throws SQLException{
         String str = "SELECT * FROM listfee WHERE hId = " + hId;
