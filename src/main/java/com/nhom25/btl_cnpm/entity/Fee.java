@@ -21,6 +21,7 @@ public class Fee {
     public Map<Integer, Integer> listOfHousehold; // contains the id of household contributed
 
     
+    
     public Fee(int mId, String name, int totalMoney, int numOfHousehold) {
         this.fId = mId;
         this.name = name;
