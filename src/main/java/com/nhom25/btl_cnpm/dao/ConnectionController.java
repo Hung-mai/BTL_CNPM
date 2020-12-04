@@ -529,6 +529,3 @@ public class ConnectionController {
            return result;
        }
 }
-    
-
-
