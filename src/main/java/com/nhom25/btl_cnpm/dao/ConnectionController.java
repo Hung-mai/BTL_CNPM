@@ -44,7 +44,36 @@ public class ConnectionController {
      */
     public List<Household> findAllHousehold(){
         List<Household> householdList = new ArrayList<>();
-
+             
+        try{
+            String sql = "select * from household";            
+            ResultSet rs = stat.executeQuery(sql);
+            
+            while(rs.next()){
+                Household hd = new Household(rs.getInt("hId"), rs.getString("householder"), 
+                        rs.getInt("numberOfPeople"), rs.getInt("money"));
+                hd.setListOfFee(findFeeOfHousehold(hd));
+                householdList.add(hd);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            if(stat != null){
+                try {
+                    stat.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn != null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
         return householdList;
     }
     
