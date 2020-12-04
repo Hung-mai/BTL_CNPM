@@ -23,7 +23,7 @@ import javax.swing.JPanel;
  */
 public class ScreenSwitchingController {
     
-    private JPanel root;
+    private final JPanel root;
     private String kindSelected = "";
     List<DanhMucBean> listItem = null;
 
@@ -46,9 +46,9 @@ public class ScreenSwitchingController {
    
     public void setEvent(List<DanhMucBean> listItem) {
         this.listItem = listItem;
-        for(DanhMucBean item : listItem){
+        listItem.forEach(item -> {
             item.getJlb().addMouseListener(new LabelEvent(item.getKind(), item.getJpn(), item.getJlb()));
-        }
+        });
     }
     
 //    public void setAction(List<DanhMucBean> listItem) {
@@ -65,8 +65,8 @@ public class ScreenSwitchingController {
         private JPanel node;
         
         public String kind;
-        private JPanel jpnItem;
-        private JLabel jlbItem;
+        private final JPanel jpnItem;
+        private final JLabel jlbItem;
 
         public LabelEvent(String kind, JPanel jpnItem, JLabel jlbItem) {
             this.kind = kind;
