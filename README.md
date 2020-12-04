@@ -38,24 +38,12 @@ Cài đặt cơ sở dữ liệu:
     START TRANSACTION;
     SET time_zone = "+00:00";
 
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng fee
---
-
     CREATE TABLE fee (
       fId int(11) NOT NULL,
       name varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
       totalMoney int(11) NOT NULL,
       numberOfHousehold int(11) NOT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng household
---
 
     CREATE TABLE household (
       hId int(11) NOT NULL,
@@ -64,63 +52,29 @@ Cài đặt cơ sở dữ liệu:
       money int(11) DEFAULT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
---
--- Cấu trúc bảng cho bảng listfee
---
     CREATE TABLE listfee (
       hId int(11) DEFAULT NULL,
       fId int(11) DEFAULT NULL,
       money int(11) DEFAULT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
---
--- Chỉ mục cho các bảng đã đổ
---
-
---
--- Chỉ mục cho bảng fee
---
     ALTER TABLE fee
       ADD PRIMARY KEY (fId);
 
---
--- Chỉ mục cho bảng household
---
     ALTER TABLE household
       ADD PRIMARY KEY (hId);
 
---
--- Chỉ mục cho bảng listfee
---
+
     ALTER TABLE listfee
       ADD KEY hId (hId),
       ADD KEY fId (fId);
 
---
--- AUTO_INCREMENT cho các bảng đã đổ
---
-
---
--- AUTO_INCREMENT cho bảng fee
---
     ALTER TABLE fee
       MODIFY fId int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
---
--- AUTO_INCREMENT cho bảng household
---
     ALTER TABLE household
       MODIFY hId int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
---
--- Các ràng buộc cho các bảng đã đổ
---
-
---
--- Các ràng buộc cho bảng listfee
---
     ALTER TABLE listfee
       ADD CONSTRAINT listfee_ibfk_1 FOREIGN KEY (hId) REFERENCES household (hId),
       ADD CONSTRAINT listfee_ibfk_2 FOREIGN KEY (fId) REFERENCES fee (fId);
