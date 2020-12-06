@@ -25,10 +25,6 @@ import java.util.logging.Logger;
  */
 
 public class ConnectionController {
-    // viáº¿t phÆ°Æ¡ng thá»©c liĂªn káº¿t Ä‘áº¿n database
-    // lÆ°u Ă½ lĂ  cáº§n thĂªm dependency cá»§a mysql vĂ o file pom.xml
-    // lĂªn gg search mysql mvn. tĂ¬m Ä‘áº¿n Ä‘Æ°á»�ng Ä‘áº«n Ä‘áº§u tiĂªn. chá»�n Ä‘Ăºng phiĂªn báº£n mysql Ä‘ang
-    // sá»­ dá»¥ng vĂ  cop dependency vĂ o pom.xml
     private final Connection conn;
     private final Statement stat;
     
@@ -38,10 +34,6 @@ public class ConnectionController {
         this.stat = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
     }
     
-    /**
-     * hĂ m tĂ¬m kiáº¿m toĂ n bá»™ há»™ dĂ¢n, khoáº£n phĂ­ vĂ  hĂ m tráº£ vá»� khoáº£n phĂ­ theo há»™ dĂ¢n, há»™ dĂ¢n theo khoáº£n phĂ­
-     * @return 
-     */
     public List<Household> findAllHousehold(){
         List<Household> householdList = new ArrayList<>();  
         try{
@@ -130,12 +122,6 @@ public class ConnectionController {
         return listOfHousehold;
     }
     
-    /**
-     * Ă¡p dá»¥ng Ä‘á»ƒ thĂªm há»™ dĂ¢n má»›i
-     * chá»‰ thĂªm khi Ä‘Ă£ cĂ³ danh sĂ¡ch cĂ¡c khoáº£n thu phĂ­ trong listOfFee cá»§a há»™ Ä‘Ă³
-     * @param household
-     * @throws SQLException 
-     */
     public void insertHousehold(Household household) throws SQLException{
         String insertHousehold = "INSERT INTO household(householder, numberOfPeople, money) VALUES ('" 
                 + household.getHouseholder() + "'," + household.getNumOfPeople() + "," + household.getNumOfPeople()*6 + ")";
@@ -180,24 +166,11 @@ public class ConnectionController {
         }
     }
     
-    /**
-     * thĂªm tĂªn má»™t loáº¡i Ä‘Ă³ng gĂ³p má»›i
-     * giĂ¡ trá»‹ máº·c Ä‘á»‹nh lĂ  0
-     * @param name
-     * @throws SQLException 
-     */
     public void insertFee(String name) throws SQLException{
         String insertFee = "INSERT INTO fee (name, totalMoney, numberOfHousehold) VALUES ('" + name + "', 0, 0)";
         this.stat.executeUpdate(insertFee);
     }
-    
-    /**
-     * thĂªm phĂ­ hoĂ n toĂ n má»›i cá»§a 1 há»™ dĂ¢n theo id há»™ dĂ¢n cĂ³ vĂ  id cá»§a loáº¡i phĂ­ Ä‘Ă³
-     * @param hId
-     * @param fId
-     * @param money
-     * @throws SQLException 
-     */
+
     public void insertFeeHousehold(int hId, int fId, int money) throws SQLException{
         String listFee = "INSERT INTO listFee VALUES (" + hId + "," + fId + "," + money + ")";
             this.stat.executeUpdate(listFee);
@@ -227,20 +200,12 @@ public class ConnectionController {
         }
     }
     
-    /**
-     * chá»‰nh sá»­a sá»‘ ngÆ°á»�i trong má»™t há»™ khi Ä‘Ă£ biáº¿t Id cá»§a há»™ Ä‘Ă³
-     * @param hId
-     * @param numberOfPeople
-     * @throws SQLException 
-     */
     public void modifyNumberOfPeople(int hId, int numberOfPeople) throws SQLException{
         int money = numberOfPeople*6;
         int number = 0;
         ResultSet rset = this.stat.executeQuery("SELECT * FROM household where hId = " + hId);
         while(rset.next()){
            number = rset.getInt("numberOfPeople");
-           //int hmoney = rset.getInt("money");
-           //hmoney += money - number*6;
            rset.updateInt("money", money);
            rset.updateInt("numberOfPeople", numberOfPeople);
            rset.updateRow();
@@ -250,7 +215,6 @@ public class ConnectionController {
         while(rset.next()){ 
             int totalMoney = rset.getInt("totalMoney");
             totalMoney = totalMoney + money - number*6;
-            //System.out.println("So tien thay doi: " + (money - number*6));
             rset.updateInt("totalMoney", totalMoney);
             rset.updateRow();
         }
@@ -267,12 +231,6 @@ public class ConnectionController {
         this.stat.executeUpdate(updateFee);
     }
     
-    /**
-     * Chá»‰nh sá»­a tĂªn cá»§a má»™t há»™
-     * @param hId
-     * @param name
-     * @throws SQLException 
-     */
     public void modifyHouseholder(int hId, String name) throws SQLException{
         ResultSet rset = this.stat.executeQuery("SELECT * FROM household");
         while(rset.next()){
@@ -295,13 +253,6 @@ public class ConnectionController {
         }
     }
     
-    /**
-     * Chá»‰nh sá»­a sá»‘ tiá»�n Ä‘Ă³ng cá»§a má»™t khoáº£n phĂ­ xĂ¡c Ä‘á»‹nh.
-     * @param hId
-     * @param fId
-     * @param money
-     * @throws SQLException 
-     */
     public void modifyFeeHouseholder(int hId, int fId, int money) throws SQLException{
         int adjustMoney = 0;
         ResultSet rset = this.stat.executeQuery("SELECT * FROM listFee");
