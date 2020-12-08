@@ -131,14 +131,6 @@ public class InfoJP extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jLabel14.setIcon(new javax.swing.ImageIcon("D:\\HUST\\20201\\IT3180\\BTL_CNPM\\src\\main\\java\\com\\nhom25\\btl_cnpm\\images\\Dung.png")); // NOI18N
-
-        jLabel15.setIcon(new javax.swing.ImageIcon("D:\\HUST\\20201\\IT3180\\BTL_CNPM\\src\\main\\java\\com\\nhom25\\btl_cnpm\\images\\Tuan.png")); // NOI18N
-
-        jLabel16.setIcon(new javax.swing.ImageIcon("D:\\HUST\\20201\\IT3180\\BTL_CNPM\\src\\main\\java\\com\\nhom25\\btl_cnpm\\images\\Hung.png")); // NOI18N
-
-        jLabel17.setIcon(new javax.swing.ImageIcon("D:\\HUST\\20201\\IT3180\\BTL_CNPM\\src\\main\\java\\com\\nhom25\\btl_cnpm\\images\\Chuong .png")); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -185,7 +177,7 @@ public class InfoJP extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(387, 387, 387)
                         .addComponent(jLabel1)))
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -224,7 +216,7 @@ public class InfoJP extends javax.swing.JPanel {
                             .addComponent(jLabel11)
                             .addComponent(jLabel10)))
                     .addComponent(jLabel14))
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(292, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
