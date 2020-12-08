@@ -10,7 +10,6 @@ D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\service\FeeServi
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\view\pages\AddFeeJF.java
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\view\pages\ChangeFeeOfHouseholdJF.java
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\controller\HouseholdController.java
-D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\dao\HouseholdDAO.java
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\entity\Fee.java
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\entity\Household.java
 D:\HUST\20201\IT3180\BTL_CNPM\src\main\java\com\nhom25\btl_cnpm\view\pages\FeeManagerJP.java
