@@ -85,7 +85,7 @@ public class InfoJP extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1026, 590));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel1.setText("Bài tập lớn");
+        jLabel1.setText("BÀI TẬP LỚN");
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel7.setText("Nhập môn Công nghệ phần mềm");
@@ -177,14 +177,14 @@ public class InfoJP extends javax.swing.JPanel {
                             .addComponent(jLabel6)
                             .addComponent(jLabel14)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(398, 398, 398)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(268, 268, 268)
                         .addComponent(jLabel9))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(288, 288, 288)
-                        .addComponent(jLabel7)))
+                        .addComponent(jLabel7))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(387, 387, 387)
+                        .addComponent(jLabel1)))
                 .addContainerGap(177, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
