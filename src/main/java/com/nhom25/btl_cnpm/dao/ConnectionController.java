@@ -333,7 +333,7 @@ public class ConnectionController {
            }
     }
     
-     public void deleteHousehold(int hId) throws SQLException{
+    public void deleteHousehold(int hId) throws SQLException{
         String str = "SELECT * FROM listfee WHERE hId = " + hId;
         ResultSet rset = this.stat.executeQuery(str);
         Map<Integer, Integer> listOfFee = new HashMap<>();
@@ -371,7 +371,7 @@ public class ConnectionController {
         }
     }
     
-     public void deleteFee(int fId)throws SQLException {
+    public void deleteFee(int fId)throws SQLException {
         String test = "SELECT * FROM listfee WHERE listfee.fId =" + fId +";";
         Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);        
         ResultSet testF = st.executeQuery(test);
@@ -382,32 +382,30 @@ public class ConnectionController {
         this.stat.executeUpdate("DELETE FROM fee WHERE fee.fId =" +  fId +";");
     }
      
-          public void deleteFeeOfHousehold(int fId,int hId)throws SQLException {
+    public void deleteFeeOfHousehold(int fId,int hId)throws SQLException {
         String test = "SELECT * FROM listfee WHERE listfee.fId =" + fId +" AND listfee.hId = "+ hId+";";
         ResultSet testLF = this.stat.executeQuery(test);
-            if(testLF.next()){
-                int money = testLF.getInt("money");
-                this.stat.executeUpdate("DELETE FROM listfee WHERE (listfee.fId=" +fId+" AND listfee.hId = "+hId+");");
-                
-                testLF = this.stat.executeQuery("SELECT * FROM household WHERE hId =" +hId);
-                testLF.next();
-                int totalMoney = testLF.getInt("money");
-                totalMoney -= money;
-                this.stat.executeUpdate("UPDATE household SET money = " + totalMoney + " WHERE household.hId = "+ hId +";");
-                
-                testLF = this.stat.executeQuery("SELECT * FROM fee WHERE fId =" +fId);
-                testLF.next();
-                totalMoney = testLF.getInt("totalMoney");
-                totalMoney -= money;
-                int num = testLF.getInt("numberOfHousehold");
-                num -= 1;
-                this.stat.executeUpdate("UPDATE fee SET totalMoney = " + totalMoney + " WHERE fee.fId = "+ fId +";");
-                this.stat.executeUpdate("UPDATE fee SET numberOfHousehold = " + num + " WHERE fee.fId = "+ fId +";");
-            }
-     }
+        if(testLF.next()){
+            int money = testLF.getInt("money");
+            this.stat.executeUpdate("DELETE FROM listfee WHERE (listfee.fId=" +fId+" AND listfee.hId = "+hId+");");   
+            testLF = this.stat.executeQuery("SELECT * FROM household WHERE hId =" +hId);
+            testLF.next();
+            int totalMoney = testLF.getInt("money");
+            totalMoney -= money;
+            this.stat.executeUpdate("UPDATE household SET money = " + totalMoney + " WHERE household.hId = "+ hId +";");
+         
+            testLF = this.stat.executeQuery("SELECT * FROM fee WHERE fId =" +fId);
+            testLF.next();
+            totalMoney = testLF.getInt("totalMoney");
+            totalMoney -= money;
+            int num = testLF.getInt("numberOfHousehold");
+            num -= 1;
+            this.stat.executeUpdate("UPDATE fee SET totalMoney = " + totalMoney + " WHERE fee.fId = "+ fId +";");
+            this.stat.executeUpdate("UPDATE fee SET numberOfHousehold = " + num + " WHERE fee.fId = "+ fId +";");
+        }
+    }
     
-      public int[] findH(String f) throws SQLException {
-        
+    public int[] findH(String f) throws SQLException {   
         String sfind = "SELECT * FROM household WHERE householder LIKE '%"+f+"%';";
         ResultSet find = this.stat.executeQuery(sfind);
         int i = find.getType();
@@ -420,7 +418,7 @@ public class ConnectionController {
         return A;    
     }
       
-      public int[] findF(String f) throws SQLException {
+    public int[] findF(String f) throws SQLException {
         
         String sfind = "SELECT * FROM fee WHERE name LIKE '%"+f+"%';";
         ResultSet find = this.stat.executeQuery(sfind);
@@ -434,177 +432,49 @@ public class ConnectionController {
         return A;    
     }
     
-       public Fee findFee(int fId) throws SQLException{
-           String s = "Select * from fee where fid = '" + fId + "'";
-           ResultSet rs = this.stat.executeQuery(s);
-           while(rs.next()){
-               Fee f = new Fee(rs.getInt("fId"), rs.getString("name"), 
-                       rs.getInt("totalMoney"), rs.getInt("numberOfHousehold"));
-               f.setListOfHousehold(findHouseholdOfFee(f));
-               return f;
-           }
-           return null;
-       }
+    public Fee findFee(int fId) throws SQLException{
+         String s = "Select * from fee where fid = '" + fId + "'";
+         ResultSet rs = this.stat.executeQuery(s);
+         while(rs.next()){
+             Fee f = new Fee(rs.getInt("fId"), rs.getString("name"), 
+                   rs.getInt("totalMoney"), rs.getInt("numberOfHousehold"));
+             f.setListOfHousehold(findHouseholdOfFee(f));
+             return f;
+         }
+         return null;
+     }
        
-       public Household findHousehold(int hId) throws SQLException{
-           String s = "Select * from household where hid = '" + hId + "'";
-           ResultSet rs = this.stat.executeQuery(s);
-           while(rs.next()){
-               Household hd = new Household(rs.getInt("hId"), rs.getString("householder"), 
-                        rs.getInt("numberOfPeople"), rs.getInt("money"));
-                hd.setListOfFee(findFeeOfHousehold(hd));
-                return hd;
-           }
-           return null;
-       }
+     public Household findHousehold(int hId) throws SQLException{
+         String s = "Select * from household where hid = '" + hId + "'";
+         ResultSet rs = this.stat.executeQuery(s);
+         while(rs.next()){
+             Household hd = new Household(rs.getInt("hId"), rs.getString("householder"), 
+                     rs.getInt("numberOfPeople"), rs.getInt("money"));
+             hd.setListOfFee(findFeeOfHousehold(hd));
+             return hd;
+         }
+         return null;
+     }
        
-       public List<Fee> findFeeNotChargeYet(int hId) throws SQLException{
-           List<Fee> result = new ArrayList<>();
-           String sql = "select fId from fee except (select fId from listfee where hId = " + hId + ")";
-           Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-           ResultSet res = state.executeQuery(sql);
-           while(res.next()){
-               result.add(findFee(res.getInt("fId")));
-           }
-           return result;
-       }
+     public List<Fee> findFeeNotChargeYet(int hId) throws SQLException{
+         List<Fee> result = new ArrayList<>();
+         String sql = "select fId from fee except (select fId from listfee where hId = " + hId + ")";
+         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+         ResultSet res = state.executeQuery(sql);
+         while(res.next()){
+             result.add(findFee(res.getInt("fId")));
+         }
+         return result;      
+     }
        
-       public List<Household> findHouseholdNotChargeYet(int fId) throws SQLException{
-           List<Household> result = new ArrayList<>();
-           String sql = "select hId from household except (select hId from listfee where fId = " + fId + ")";
-           Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-           ResultSet res = state.executeQuery(sql);
-           while(res.next()){
-               result.add(findHousehold(res.getInt("hId")));
-           }
-           return result;
-       }
+     public List<Household> findHouseholdNotChargeYet(int fId) throws SQLException{
+         List<Household> result = new ArrayList<>();
+         String sql = "select hId from household except (select hId from listfee where fId = " + fId + ")";
+         Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+         ResultSet res = state.executeQuery(sql);
+         while(res.next()){
+             result.add(findHousehold(res.getInt("hId")));
+         }
+         return result;
+     }
 }
-
-
-
-/*
-áda
-ad
-sd
-a
-a
-sda
-s
-d
-ád
-á
-fd
-sf
-dsf
-ads
-fd
-sf
-dsaf
-ads
-f
-dsaf
-ds
-fad
-sf
-ádf
-ads
-fa
-sf
-sdf
-sda
-f
-dsf
-adsf
-ds
-f
-dsf
-sd
-fds
-f
-ád
-f
-sdaf
-ds
-fds
-f
-dsf
-á
-dfas
-df
-ádf
-sda
-f
-dsf
-sdf
-dsa
-fa
-sdf
-ádf
-á
-df
-sdaf
-dsa
-f
-ádf
-ds
-f
-sdf
-ád
-fa
-sdf
-ád
-f
-ádf
-sdaf
-sd
-f
-
-fdsa
-fasd
-f
-ádf
-ádf
-á
-fa
-sdf
-à
-á
-fs
-df
-ád
-fa
-sdf
-ádf
-sda
-ád
-fas
-df
-ádf
-ád
-f
-sadf
-sd
-f
-ádf
-ád
-fa
-sdf
-ád
-fasd
-f
-ád
-dsa
-fads
-f
-sdaf
-sd
-f
-sad
-fas
-f
-ádf
-ád
-sda
-f
-*/
