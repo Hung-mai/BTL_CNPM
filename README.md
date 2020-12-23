@@ -1,5 +1,6 @@
 Tên phần mềm: Neighborhood finance management software
 
+
 Tóm tắt: Phần mềm dùng để quản lý các khoản thu, chi của các hộ dân trong khu dân cư. Tăng khả năng quản lý, tăng tính chính xác và sự tiện lợi cho người quản lý tài chính trong khu dân cư.
 
 Nhóm phát triển: Nhóm 14
